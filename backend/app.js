@@ -1,12 +1,17 @@
+import * as dotenv from 'dotenv'
 import express from 'express'
-
+dotenv.config()
 const app = express()
-port = process.env.PORT
+
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
   })
   
-  app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-  })
+  app.listen(process.env.PORT, (error) =>{
+    if(!error){
+        console.log(`Server is Successfully Running on ${process.env.PORT}`)}
+    else
+        console.log("Error occurred, server can't start", error);
+    }
+);
