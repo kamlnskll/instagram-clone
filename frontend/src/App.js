@@ -1,7 +1,9 @@
+import Register from "./pages/Register.tsx";
+
 function App() {
   return (
     <div>
-      Hello World
+    <Register />
     </div>
   );
 }
