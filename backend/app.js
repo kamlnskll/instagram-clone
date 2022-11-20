@@ -1,9 +1,14 @@
 import * as dotenv from 'dotenv'
 import express from 'express'
 import mongoose from 'mongoose'
+import cors from 'cors'
+import bodyParser from 'body-parser'
+import userRoutes from './routes/user.js'
 
-dotenv.config()
 const app = express()
+dotenv.config()
+app.use(cors())
+app.use(bodyParser.json())
 
 const connectToMongoCluster = async () => {
 try{
@@ -22,6 +27,11 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
   })
   
+
+// app.use('/api/posts', )
+app.use('/api/user', userRoutes)
+
+
   app.listen(process.env.PORT, (error) =>{
     if(!error){
         connectToMongoCluster()

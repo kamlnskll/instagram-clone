@@ -1,6 +1,7 @@
 import bcrypt, { hash } from 'bcrypt'
 import User from '../models/user.js'
 import asyncHandler from 'express-async-handler'
+import { generateAccessToken } from '../utils/auth.js'
 
 // Register User
 
@@ -36,11 +37,47 @@ password: hashedPassword,
 
 })
 
+if (user) {
+    const token = generateAccessToken(user._id)
+    res.status(201).json({
+        _id: user._id,
+        email: user.email,
+        fullName: user.fullName,
+        userName: user.userName,
+        token
+    })
+} else {
+    res.status(400)
+    throw new Error('Invalid user data')
+}
 
+res.json({message: 'Registered new user!'})
 })
 
-// Login User
+// Login User Function 
 
-export const loginUser = asyncHandler(async (req, res) => {})
+export const loginUser = asyncHandler(async (req, res) => {
+    const {userName, password} = req.body
 
-// 
+    const user = await User.findOne({userName})
+    if (user && (await bcrypt.compare(password, user.password))) {
+        const token = generateAccessToken(user._id)
+        res.json({
+            _id: user._id,
+        email: user.email,
+        fullName: user.fullName,
+        userName: user.userName,
+        token
+        })
+    } else {
+        res.status(400)
+        throw new Error('No user found')
+    }
+})
+
+// Fetch user data once login is successful
+
+export const fetchLoggedInUserData = asyncHandler(async (req, res) => {
+res.json({message: 'User data goes here'})
+
+})

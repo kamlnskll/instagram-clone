@@ -1,9 +1,13 @@
 import jwt from 'jsonwebtoken'
+// import * as dotenv from 'dotenv'
+// dotenv.config()
 
-const generateAccessToken = jwt.sign({
+export const generateAccessToken = (id) => {
+    return jwt.sign({id}, `${process.env.JWT_SECRET_ACCESS_TOKEN}`, {
+        expiresIn: '10m',
+    })
+}
 
-})
-
-const generateRefreshToken = jwt.sign({
+// export const generateRefreshToken = jwt.sign({
     
-})
+// })
