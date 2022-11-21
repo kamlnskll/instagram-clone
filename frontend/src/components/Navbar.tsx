@@ -1,27 +1,33 @@
 import React from 'react'
+import { CreateUnselected } from './icons/Create'
+import { ExploreUnselected } from './icons/Explore'
+import { HomeSelected } from './icons/Home'
+import { MessageUnselected } from './icons/Messages'
+import { NotificationsUnselected } from './icons/Notifications'
+import { SearchBtnIcon } from './icons/Search'
 
 const menuItems: any =[
 
   {name: "Home",
-  icon: "Home Icon"},
+  icon: <HomeSelected />},
   
   {name: "Search",
-  icon: "Search Icon"},
+  icon: <SearchBtnIcon />},
   
   {name: "Explore",
-  icon: "Explore Icon"},
+  icon: <ExploreUnselected />},
   
   {name: "Messages",
-  icon: "Messages Icon"},
+  icon: <MessageUnselected />},
   
   {name: "Notifications",
-  icon: "Notifications Icon"},
+  icon: <NotificationsUnselected />},
   
   {name: "Create",
-  icon: "Create Icon"},
+  icon: <CreateUnselected />},
   
   {name: "Profile",
-  icon: "Profile Picture Icon"},
+  icon: "Profile Pic"},
   
   ]
 
@@ -30,17 +36,16 @@ const Navbar = () => {
 
 
   return (
-    <div>
-      {console.log(menuItems)}
-      {menuItems.map((item, index) => { 
+    <div className='h-screen bg-sky-100 w-1/4'>
+      {menuItems.map((item: any) => { 
         return (
-        <div className='flex gap-4'>
+          <div className='flex gap-8 pl-4 bg-red-100 w-full'>
         <h1>{item.icon}</h1>
         <h1>{item.name}</h1>
         </div>
+
       )})}
-    </div>
-  )
+      </div>)
 }
 
 export default Navbar
