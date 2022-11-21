@@ -1,9 +1,14 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
 
 const HomeFeed = () => {
   return (
-    <div>HomeFeed</div>
+      <div>
+      <h1>HomeFeed</h1>
+
+      </div>
   )
+
 }
 
 export default HomeFeed
