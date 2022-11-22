@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import userRoutes from './routes/user.js'
+import postRoutes from './routes/post.js'
 
 const app = express()
 dotenv.config()
@@ -28,7 +29,8 @@ app.get('/', (req, res) => {
   })
   
 
-// app.use('/api/posts', )
+// Backend API routes
+app.use('/api/posts', postRoutes)
 app.use('/api/user', userRoutes)
 
 
