@@ -1,13 +1,17 @@
 import React from 'react'
 
 type Props = {
-  isOnFeed: boolean
+  isOnFeed: boolean,
+  post: any,
 }
 
-const Post = ({isOnFeed}: Props) => {
+const Post = ({isOnFeed, post}: Props) => {
 
   return (
-    <div>Post</div>
+    <div key={post._id}>Post
+      <h1>{post.caption}</h1>
+      <img src={post.photo} />
+    </div>
   )
 
 

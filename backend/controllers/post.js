@@ -38,7 +38,7 @@ export const getAllPosts = async (req, res) => {
 
     try{
         const posts = await Post.find()
-        res.status(200).json(post)
+        res.status(200).json(posts)
     } catch(err) { throw err }
 
 
