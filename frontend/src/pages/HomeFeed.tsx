@@ -16,7 +16,7 @@ console.log(res)})
   return (
       <div className='flex'>
       <Navbar />
-      <div>
+      <div className='mx-auto'>
       {post.map((eachPost) => {
         return (
       <Post isOnFeed={true} post={eachPost}/>
