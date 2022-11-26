@@ -57,9 +57,13 @@ res.json({message: 'Registered new user!'})
 // Login User Function 
 
 export const loginUser = asyncHandler(async (req, res) => {
-    const {userName, password} = req.body
+    const { userName, password } = req.body
+    if(!userName || !password) {
+        res.status(400)
+        throw new Error('All fields need to be filled out.')
+    }
 
-    const user = await User.findOne({userName})
+    const user = await User.findOne({ userName })
     if (user && (await bcrypt.compare(password, user.password))) {
         const token = generateAccessToken(user._id)
         res.json({
@@ -71,7 +75,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         })
     } else {
         res.status(400)
-        throw new Error('No user found')
+        throw new Error('Invalid credentials')
     }
 })
 
