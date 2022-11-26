@@ -5,11 +5,13 @@ const postURL = process.env.REACT_APP_BACKEND_POST_URL
 
 export const getAllPosts = async () => {
     try {
-        const data = await axios.get(`${baseURL}/posts/getallposts`)
+        const data = await axios.get(`${baseURL}${postURL}/getallposts`)
         return data.data
         // payload = data
         // console.log(data)
         // return payload
     } catch(error){console.log(error)}
 }
+
+
 
