@@ -12,9 +12,9 @@ if(!email || !fullName || !userName || !password) {
     throw new Error('All fields need to be filled out.')
 }
 
-const checkIfEmailIsTaken = await User.findOne({email})
+const checkIfEmailIsTaken = await User.findOne({ email })
 
-const checkIfUserNameIsTaken = await User.findOne({userName})
+const checkIfUserNameIsTaken = await User.findOne({ userName })
 
 if(checkIfEmailIsTaken){
     res.status(400)
