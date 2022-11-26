@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { stringify } from 'querystring'
 
 const baseURL = process.env.REACT_APP_BACKEND_BASE_URL
 const userURL = process.env.REACT_APP_BACKEND_USER_URL
@@ -21,10 +20,10 @@ export const registerNewUser = async (email: string, fullName: string, userName:
         })} catch (error) {console.log('This is the error', error)}
     }
 
-export const loginUser = async (email: string, userName: string, password: string) => {
+export const loginUser = async (userName: string, password: string) => {
 try{
     await axios.post(`${baseURL}${userURL}/login`, {
-    email: email,
+    // email: email,
     userName: userName,
     password: password
     }).then(function (response){
