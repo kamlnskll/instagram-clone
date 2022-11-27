@@ -9,6 +9,7 @@ caption: {
 
 photo: {
     type: String,
+    required: true
 },
 
 comments: [{
@@ -16,11 +17,22 @@ comments: [{
     postedBy:{type: ObjectId, ref: "User"},
 }],
 
+numberOfComments: {
+    type: Number,
+    default: 0
+},
+
 likes: [{type: ObjectId,
 ref: "User"}],
 
+numberOfLikes: {
+    type: Number,
+    default: 0,
+},
+
 postedBy: [{type: ObjectId,
-ref: "User"}]
+ref: "User",
+required: true}]
     
 }, {
 timestamps: true
