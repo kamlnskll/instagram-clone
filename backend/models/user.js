@@ -32,6 +32,23 @@ required: true,
     followers:[{type: ObjectId, ref: 'User'}],
 
     following: [{type: ObjectId, ref: 'User'}],
+
+    followerCount: {
+        type: Number,
+        default: 0
+    },
+
+    followingCount: {
+        type: Number,
+        default: 0
+    },
+
+    postCount: {
+        type: Number,
+        default: 0
+    },
+
+    bio: {type: String},
     
 }, {
     timestamps: true
