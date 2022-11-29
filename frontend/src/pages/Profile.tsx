@@ -17,7 +17,6 @@ post: '',
 bio: '',
 })
 
-// Figure out how to map response to useState
 
   useEffect(() => {
 getUserbyUsername(username).then((res) => {setUserData(res)
