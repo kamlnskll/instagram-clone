@@ -38,4 +38,18 @@ try{
 
 }
 
+export const getUserbyUsername = async (userName: string) => {
+
+try{
+
+await axios.get(`${baseURL}${userURL}/${userName}`).then(function (response){
+    console.log(response.data)
+})
+
+
+} catch(error){
+    console.log(error)
+}
+
+}
 
