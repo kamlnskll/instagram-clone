@@ -79,9 +79,46 @@ export const loginUser = asyncHandler(async (req, res) => {
     }
 })
 
-// Fetch user data once login is successful
 
-export const fetchLoggedInUserData = asyncHandler(async (req, res) => {
-res.json({message: 'User data goes here'})
+
+export const getFollowingPosts = asyncHandler(async (req, res, next) => {
+
+
+
 
 })
+
+export const followUser = asyncHandler(async (req, res, next) => {
+
+
+})
+
+export const unfollowUser = asyncHandler(async (req, res, next) => {
+
+})
+
+export const getUserbyUsername = asyncHandler(async (req, res, next) => {
+
+const user = await User.findOne({userName: req.params.username}).select('_id userName fullName profilePic followers following followerCount followingCount postCount bio posts').populate("posts")
+   if(user){
+        res.status(200).json({
+            userId: user._id,
+            userName: user.userName,
+            fullName: user.fullName,
+            profilePic: user.profilePic,
+            following: user.following,
+            followers: user.followers,
+            followingCount: user.followingCount,
+            followerCount: user.followerCount,
+            postCount: user.postCount,
+            bio: user.bio,
+            posts: user.posts,
+        })
+        
+    }
+    else{
+        console.log("No user found with that username")
+    }
+}
+
+)

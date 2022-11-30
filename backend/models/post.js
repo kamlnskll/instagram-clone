@@ -30,9 +30,9 @@ numberOfLikes: {
     default: 0,
 },
 
-postedBy: [{type: ObjectId,
+postedBy: {type: ObjectId,
 ref: "User",
-required: true}]
+required: true}
     
 }, {
 timestamps: true
