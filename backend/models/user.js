@@ -43,6 +43,11 @@ required: true,
         default: 0
     },
 
+    posts: [{
+        type: ObjectId,
+        ref: "Post",
+    }],
+
     postCount: {
         type: Number,
         default: 0
