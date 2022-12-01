@@ -21,7 +21,6 @@ export const UserContextProvider = ({children}) => {
 
     const [state, dispatch] = useReducer(userReducer, {
         user: null,
-        payload: null,
     })
 
 // Check local storage for stored token
@@ -40,5 +39,3 @@ return (
 )
 
 }
-
-throw Error ('Unknown action: ' + action.type)
