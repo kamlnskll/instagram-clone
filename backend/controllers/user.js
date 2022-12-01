@@ -113,8 +113,7 @@ const user = await User.findOne({userName: req.params.username}).select('_id use
             postCount: user.postCount,
             bio: user.bio,
             posts: user.posts,
-        })
-        
+        })        
     }
     else{
         console.log("No user found with that username")
