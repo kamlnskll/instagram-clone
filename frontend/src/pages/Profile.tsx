@@ -15,16 +15,14 @@ following: '',
 followers: '',
 followingCount: '',
 followerCount: '',
-posts: [],
 bio: '',
 })
 
 
   useEffect(() => {
-getUserbyUsername(username).then((res) => {setUserData(res)
-}).then(() => {
-  console.log(userData.posts)
-  setPost(userData.posts)}).catch((err) => console.log(err))}, [username])
+getUserbyUsername(username).then((res) => {setUserData(res) 
+  setPost(res.posts)
+}).catch((err) => console.log(err))}, [username])
 
 
   return (
