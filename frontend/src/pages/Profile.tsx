@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import { getUserbyUsername } from '../utils/axios/userAPIs'
+import Post from '../components/Post'
 
 const Profile = () => {
 
 const { username } = useParams()
+const [post, setPost] = useState([])
 const [userData, setUserData] = useState({
 userName: '',
 fullName: '',
@@ -24,8 +26,8 @@ getUserbyUsername(username).then((res) => {setUserData(res)
 
 
   return (
-    <div>
-      <div className='flex border justify-center gap-[128px] h-screen py-16'>
+    <div className='h-screen'>
+      <div className='flex border justify-center gap-[128px] py-16'>
       {/* Img div */}
       <div>
         <img className='w-[128px] h-[128px]' src={userData.profilePic}/>
@@ -51,6 +53,9 @@ getUserbyUsername(username).then((res) => {setUserData(res)
       
       </div>
       </div>
+
+      <h1>Posts here</h1>
+      <Post isOnFeed={false} post={''}/>
     </div>
   )
 }
