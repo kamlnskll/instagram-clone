@@ -7,7 +7,6 @@ const router = express.Router()
 router.use(cors())
 
 router.get('/getallposts', getAllPosts)
-
 router.use(requireLogin)
 router.get('/getpostbyid', getPostById)
 router.post('/createpost', createPost)

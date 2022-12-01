@@ -15,19 +15,21 @@ following: '',
 followers: '',
 followingCount: '',
 followerCount: '',
-post: '',
+posts: [],
 bio: '',
 })
 
 
   useEffect(() => {
 getUserbyUsername(username).then((res) => {setUserData(res)
-})}, [username])
+}).then(() => {
+  console.log(userData.posts)
+  setPost(userData.posts)}).catch((err) => console.log(err))}, [username])
 
 
   return (
     <div className='h-screen'>
-      <div className='flex border justify-center gap-[128px] py-16'>
+      <div className='flex justify-center gap-[128px] py-16'>
       {/* Img div */}
       <div>
         <img className='w-[128px] h-[128px]' src={userData.profilePic}/>
@@ -54,8 +56,13 @@ getUserbyUsername(username).then((res) => {setUserData(res)
       </div>
       </div>
 
-      <h1>Posts here</h1>
-      <Post isOnFeed={false} post={''}/>
+      
+    <div className='flex justify-evenly'>
+      {post.map((posts) => {
+        return (
+          <Post isOnFeed={false} post={posts}/>
+      )} )}
+    </div>
     </div>
   )
 }
