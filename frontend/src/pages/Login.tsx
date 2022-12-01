@@ -1,8 +1,14 @@
 import React, {useState} from 'react'
 import { loginUser } from '../utils/axios/userAPIs'
 import { useNavigate } from 'react-router'
+import { useUserContext } from '../hooks/useUserContext'
+
 
 const Login = () => {
+
+  const { dispatch } = useUserContext()
+  const token = localStorage.getItem('token')
+
 
   const [loginData, setLoginData] = useState({
     // email: '',
@@ -26,7 +32,9 @@ const Login = () => {
       <form className='flex flex-col'>
         <input placeholder="Username or Email" type='text' name='userName' onChange={changeHandler} required/>
         <input placeholder="Password" type='password' name='password' onChange={changeHandler} required/>
-        <button className='bg-sky-200 text-center' type='button' onClick={() => loginUser(loginData.userName, loginData.password).then(() => navigate('/')).then(() => console.log('logged in')).catch(error => console.log(error))}>Login User</button>
+        <button className='bg-sky-200 text-center' type='button' onClick={() => loginUser(loginData.userName, loginData.password).then(() => {
+          dispatch({type: 'LOGIN', payload: token})
+          navigate('/')}).then(() => console.log('Logged in with token', {token})).catch(error => console.log(error))}>Login User</button>
       </form>
 
       <h1>Forgot password?</h1>
