@@ -3,9 +3,9 @@ import axios from 'axios'
 const baseURL = process.env.REACT_APP_BACKEND_BASE_URL
 const postURL = process.env.REACT_APP_BACKEND_POST_URL
 
-const token = JSON.parse(localStorage.getItem("token") || '{}');
+const token = JSON.parse(localStorage.getItem('token') || '')
 
-axios.defaults.headers.common = { "Authorization":  `Bearer ${token}` }
+axios.defaults.headers.common = { 'Authorization':  `Bearer ${token}` }
 
 
 export const getAllPosts = async () => {
