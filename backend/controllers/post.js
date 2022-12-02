@@ -45,10 +45,10 @@ export const getAllPosts = async (req, res) => {
 }
 
 export const getSubscribedPosts = async (req, res) => {
-
     try{
-    const loggedInUser = await User.findById(req.user)
-    res.json(req.user)
+    const findUser = await User.findById(req.user)
+    res.status(200).json(findUser)
+
     } catch(err) { throw err }
 
 }

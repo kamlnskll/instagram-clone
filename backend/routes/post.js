@@ -8,10 +8,10 @@ router.use(cors())
 
 router.get('/getallposts', getAllPosts)
 router.get('/getpostbyid', getPostById)
+router.use(requireLogin)
 router.get('/getsubscribedposts', getSubscribedPosts)
 router.post('/createpost', createPost)
 router.delete('/deletepost', deletePost)
-router.use(requireLogin)
 
 
 export default router

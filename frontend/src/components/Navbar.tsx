@@ -5,6 +5,7 @@ import { HomeSelected } from './icons/Home'
 import { MessageUnselected } from './icons/Messages'
 import { NotificationsUnselected } from './icons/Notifications'
 import { SearchBtnIcon } from './icons/Search'
+import { getSubscribedPosts } from '../utils/axios/postAPIs'
 
 const menuItems: any =[
 
@@ -37,6 +38,9 @@ const Navbar = () => {
 
   return (
     <div className='h-screen bg-sky-100 w-1/4'>
+<button onClick={() => getSubscribedPosts().then((res) => {
+  console.log(res)})}>TEST BUTTON FOR SUBSCRIBED POSTS</button>
+
       {menuItems.map((item: any) => { 
         return (
           <div className='flex gap-8 pl-4 bg-red-100 w-full'>

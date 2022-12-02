@@ -4,8 +4,8 @@ import User from '../models/user.js'
 // dotenv.config()
 
 export const generateAccessToken = (id) => {
-    return jwt.sign({id}, `${process.env.JWT_SECRET_ACCESS_TOKEN}`, {
-        expiresIn: '10m',
+    return jwt.sign({ id }, process.env.JWT_SECRET_ACCESS_TOKEN, {
+        expiresIn: '45m',
     })
 }
 
@@ -14,8 +14,9 @@ const { authorization } = req.headers
 if(!authorization){
     return res.status(401).json({error: 'Auth Token Required'})
 }
-    const token = authorization.split(' ')[0]
+    const token = authorization.split(' ')[1]
     try{
+        
     const {_id} = jwt.verify(token, process.env.JWT_SECRET_ACCESS_TOKEN)
 
     req.user = await User.findOne({_id}).select('_id')
