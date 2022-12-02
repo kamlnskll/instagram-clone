@@ -12,7 +12,6 @@ console.log(res)})
 }, [])
 
 
-
   return (
       <div className='flex'>
       <Navbar />
