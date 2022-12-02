@@ -13,5 +13,14 @@ export const getAllPosts = async () => {
     } catch(error){console.log(error)}
 }
 
+export const getSubscribedPosts = async () => {
+
+try {
+const data = await axios.get(`${baseURL}${postURL}/getsubscribedposts`)
+console.log(data)
+
+} catch (error) {console.log(error)}
+
+}
 
 

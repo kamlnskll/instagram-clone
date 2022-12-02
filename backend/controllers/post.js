@@ -1,4 +1,5 @@
 import Post from "../models/post.js";
+import User from "../models/user.js";
 
 export const createPost = async (req, res) => {
 
@@ -41,6 +42,14 @@ export const getAllPosts = async (req, res) => {
         res.status(200).json(posts)
     } catch(err) { throw err }
 
+}
+
+export const getSubscribedPosts = async (req, res) => {
+
+    try{
+    const loggedInUser = await User.findById(req.user)
+    res.json(req.user)
+    } catch(err) { throw err }
 
 }
 
