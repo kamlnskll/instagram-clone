@@ -19,7 +19,7 @@ if(!authorization){
         
     const {id} = jwt.verify(token, process.env.JWT_SECRET_ACCESS_TOKEN)
 
-    req.user = await User.findOne({id}).select('_id')
+    req.user = id
     next()
 
     } catch (error){

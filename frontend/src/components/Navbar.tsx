@@ -39,7 +39,7 @@ const Navbar = () => {
   return (
     <div className='h-screen bg-sky-100 w-1/4'>
 <button onClick={() => getSubscribedPosts().then((res) => {
-  console.log(res)})}>TEST BUTTON FOR SUBSCRIBED POSTS</button>
+  console.log("michael should be following all 3 peeps", res)})}>TEST BUTTON FOR SUBSCRIBED POSTS</button>
 
       {menuItems.map((item: any) => { 
         return (

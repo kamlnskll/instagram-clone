@@ -23,7 +23,7 @@ export const getSubscribedPosts = async () => {
 
 try {
 const data = await axios.get(`${baseURL}${postURL}/getsubscribedposts`)
-console.log(token)
+// console.log(token)
 return data.data
 
 } catch (error) {console.log(error)}
