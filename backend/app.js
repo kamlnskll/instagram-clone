@@ -5,6 +5,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import userRoutes from './routes/user.js'
 import postRoutes from './routes/post.js'
+import profileRoutes from './routes/profile.js'
 
 const app = express()
 dotenv.config()
@@ -32,6 +33,7 @@ app.get('/', (req, res) => {
 // Backend API routes
 app.use('/api/posts', postRoutes)
 app.use('/api/user', userRoutes)
+app.use('/api/profile', profileRoutes)
 
 
   app.listen(process.env.PORT, (error) =>{
