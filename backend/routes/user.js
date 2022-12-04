@@ -1,6 +1,7 @@
 import express from 'express'
-import { registerNewUser, loginUser, getUserbyUsername,  } from '../controllers/user.js'
 import cors from 'cors'
+import { registerNewUser, loginUser, getUserbyUsername,  } from '../controllers/user.js'
+
 
 const router = express.Router()
 router.use(cors())
