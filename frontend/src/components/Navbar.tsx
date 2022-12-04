@@ -56,7 +56,7 @@ const { logout } = logoutUser()
     <h1>Create</h1>
     </ul>
     <Link to={`/profile/${profile.userName}`} className='flex gap-4 py-4'>
-    <img className='w-[36px] h-[36px]' src={profile.profilePic}/>
+    <img className='w-[36px] h-[36px] rounded-full' src={profile.profilePic}/>
     <h1>{profile.userName}</h1>
     </Link>
     <div className='py-24'>
