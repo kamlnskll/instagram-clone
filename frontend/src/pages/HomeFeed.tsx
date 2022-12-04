@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import Navbar from '../components/Navbar'
+import NewPostModal from '../components/NewPostModal'
 import Post from '../components/Post'
 import { getAllPosts } from '../utils/axios/postAPIs'
 

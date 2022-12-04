@@ -9,6 +9,7 @@ import { getSubscribedPosts } from '../utils/axios/postAPIs'
 import { logoutUser } from '../hooks/logoutUser'
 import { Link } from 'react-router-dom'
 import { getProfileUsernameandProfilePic } from '../utils/axios/profileAPIs'
+import NewPostModal from './NewPostModal'
 
 
 
@@ -24,12 +25,15 @@ useEffect(() => {
   getProfileUsernameandProfilePic().then((res) => setProfile(res)).catch(err => console.log(err))
 }, [])
 
+const [isOpen, setIsOpen] = useState(false)
 
 const { logout } = logoutUser()
 
 
   return (
+<>
     <nav className='h-screen bg-white border-r border-gray-300 w-1/4'>
+    <NewPostModal isOpen={isOpen} />
     <div className='text-xl px-4 mx-auto h-full pt-8'>
     <Link to={'/'} className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full'> 
     <HomeSelected />
@@ -51,7 +55,7 @@ const { logout } = logoutUser()
     <NotificationsUnselected />
     <h1>Notifications</h1>
     </ul>
-    <ul className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full'>
+    <ul className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full' onClick={() => setIsOpen(!isOpen)}>
     <CreateUnselected />
     <h1>Create</h1>
     </ul>
@@ -65,7 +69,9 @@ const { logout } = logoutUser()
 <button onClick={() => logout()}>Logout User</button>
 </div>
     </div>
-  </nav>)
+  </nav>
+  </>
+  )
 }
 
 
