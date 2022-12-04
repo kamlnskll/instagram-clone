@@ -6,6 +6,7 @@ import { MessageUnselected } from './icons/Messages'
 import { NotificationsUnselected } from './icons/Notifications'
 import { SearchBtnIcon } from './icons/Search'
 import { getSubscribedPosts } from '../utils/axios/postAPIs'
+import { logoutUser } from '../hooks/logoutUser'
 
 const menuItems: any =[
 
@@ -36,10 +37,15 @@ const menuItems: any =[
 const Navbar = () => {
 
 
+const { logout } = logoutUser()
+
+
   return (
     <div className='h-screen bg-sky-100 w-1/4'>
 <button onClick={() => getSubscribedPosts().then((res) => {
   console.log("michael should be following all 3 peeps", res)})}>TEST BUTTON FOR SUBSCRIBED POSTS</button>
+
+<button onClick={() => logout()}>Logout User</button>
 
       {menuItems.map((item: any) => { 
         return (
