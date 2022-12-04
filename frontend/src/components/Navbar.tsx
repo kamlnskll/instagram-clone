@@ -29,34 +29,34 @@ const { logout } = logoutUser()
 
 
   return (
-    <nav className='h-screen bg-sky-100 w-1/4'>
-    <div className='text-xl pl-4 mx-auto h-full pt-8'>
-    <Link to={'/'} className='flex gap-4 py-4'> 
+    <nav className='h-screen bg-white border-r border-gray-300 w-1/4'>
+    <div className='text-xl px-4 mx-auto h-full pt-8'>
+    <Link to={'/'} className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full'> 
     <HomeSelected />
     <h1>Home</h1>
     </Link>
-    <ul className='flex gap-4 py-4'>
+    <ul className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full'>
     <SearchBtnIcon />    
     <h1>Search</h1>
     </ul>
-    <Link to={''} className='flex gap-4 py-4'>
+    <Link to={''} className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full'>
     <ExploreUnselected />
     <h1>Explore</h1>
     </Link>
-    <Link to={''} className='flex gap-4 py-4'>
+    <Link to={''} className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full'>
     <MessageUnselected />
     <h1>Messages</h1>
     </Link>
-    <ul className='flex gap-4 py-4'>
+    <ul className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full'>
     <NotificationsUnselected />
     <h1>Notifications</h1>
     </ul>
-    <ul className='flex gap-4 py-4'>
+    <ul className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full'>
     <CreateUnselected />
     <h1>Create</h1>
     </ul>
-    <Link to={`/profile/${profile.userName}`} className='flex gap-4 py-4'>
-    <img className='w-[36px] h-[36px] rounded-full' src={profile.profilePic}/>
+    <Link to={`/profile/${profile.userName}`} className='flex gap-4 py-2 my-2 pl-2 hover:bg-gray-50 hover:rounded-full'>
+    <img className='w-[32px] h-[32px] rounded-full' src={profile.profilePic}/>
     <h1>{profile.userName}</h1>
     </Link>
     <div className='py-24'>
