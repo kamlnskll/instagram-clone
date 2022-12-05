@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 type Props = {
   isOnFeed: boolean,
@@ -9,10 +10,10 @@ const Post = ({isOnFeed, post}: Props) => {
 return (
 isOnFeed ? (
     <div key={post._id} className='border rounded-xl'>
-      <div className='flex gap-3 my-auto py-3 border pl-4'>
-        <img className='w-10 h-10 rounded-full'src={'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'}/>
-        <h1 className='my-auto'>Username</h1>
-      </div>
+      <Link to={`/profile/${post.postedBy.userName}`} className='flex gap-3 my-auto py-3 border pl-4'>
+        <img className='w-10 h-10 rounded-full'src={post.postedBy.profilePic}/>
+        <h1 className='my-auto hover:font-semibold'>{post.postedBy.userName}</h1>
+      </Link>
       <div>
       <img className='w-[468px] h-[468px] object-fill' src={post.photo} />
       </div>
