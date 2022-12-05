@@ -6,7 +6,7 @@ export const createPost = async (req, res) => {
 
 const photo = uploadContent(req.body.photo).then(res => res.data)
     // Basic for now, add images as requirement for post
-    const newPost = new Post({
+    const newPost = await new Post({
        photo: photo,
         caption: req.body.caption,
         postedBy: req.user,
