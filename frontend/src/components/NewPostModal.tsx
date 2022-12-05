@@ -1,4 +1,5 @@
 import React from 'react'
+import Uploader from './Uploader'
 
 
 type Props =  {
@@ -13,7 +14,12 @@ const NewPostModal = ({isOpen}: Props) => {
     <div className='h-full flex'>
     <div className='my-auto mx-auto'>
     <h1 className='text-xl tracking-wide'>Drag photo and videos here</h1>
-    <button className='text-sm bg-sky-600 px-4 py-1 rounded-md font-bold text-white'>Select from computer</button>
+    <Uploader />
+
+    {/* <input 
+    type='file'
+    placeholder=''
+    className='text-sm bg-sky-600 px-4 py-1 rounded-md font-bold text-white' /> */}
 
     </div></div>
   

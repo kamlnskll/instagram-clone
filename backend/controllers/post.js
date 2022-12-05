@@ -1,6 +1,6 @@
 import Post from "../models/post.js";
 import User from "../models/user.js";
-import uploadContent from "../utils/uploadContent.js";
+import { uploadContent } from "../utils/uploadContent.js";
 
 export const createPost = async (req, res) => {
 

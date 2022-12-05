@@ -1,4 +1,4 @@
-const cloudinary = require('cloudinary').v2
+import cloudinary from 'cloudinary'
 
 cloudinary.config({ 
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
@@ -14,7 +14,7 @@ resource_type: 'auto',
 
 }
 
-module.exports = (image) => { // Image is BASE64 format
+export const uploadContent = (image) => { // Image is BASE64 format
 return new Promise((resolve, reject) => {
 cloudinary.uploader.upload(image, opts, (error, result) => {
 if (result && result.secure_url){
@@ -26,3 +26,4 @@ return reject({message: error.message})
 })
 })
 }
+
