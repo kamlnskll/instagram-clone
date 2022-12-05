@@ -10,7 +10,7 @@ import profileRoutes from './routes/profile.js'
 const app = express()
 dotenv.config()
 app.use(cors())
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '5mb'}))
 
 const connectToMongoCluster = async () => {
 try{

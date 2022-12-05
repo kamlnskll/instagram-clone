@@ -1,8 +1,13 @@
 import { useState } from 'react'
 
+type Props = {
 
+imgData: any
+setAddCaption: any,
 
-const Uploader = () => {
+}
+
+const Uploader = ({imgData, setAddCaption}: Props) => {
 // @ts-ignore
 const [fileInput, setFileInput] = useState('')
 // @ts-ignore
@@ -42,6 +47,7 @@ const handleFileSubmit = (e: any) => {
 
 const uploadImage = async (base64Img: any) => {
 console.log(base64Img)
+await imgData(base64Img).then(setAddCaption(true)).then(console.log('img data variable loaded I think')).catch((err: any) => console.log(err))
 
 }
 
@@ -58,9 +64,7 @@ console.log(base64Img)
         value={fileInput}
         name='image'
         />
-        <button className='flex border-2 mx-auto mt-4 px-2 rounded-lg font-semibold' type='submit' onClick={() => {
-            console.log(fileInput)        
-            }}>Next</button>
+        <button className='flex border-2 mx-auto mt-4 px-2 rounded-lg font-semibold' type='submit' onClick={() => {console.log('Btn submitted')}}>Next</button>
         </form>
 
     </div>

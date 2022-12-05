@@ -12,6 +12,9 @@ const [img, setImg] = useState('')
 const [addCaption, setAddCaption] = useState(false)
 const [caption, setCaption] = useState('')
 
+const imgData = async (data: string) => {
+await setImg(data)
+}
 
   return (
     isOpen ? (
@@ -26,11 +29,15 @@ const [caption, setCaption] = useState('')
     onChange={(e) => setCaption(e.target.value)}
     /> 
     <button onClick={() => {
-      console.log(caption)
-      console.log('fileInput here')}}>Upload</button>
+      console.log(caption, img)
+      createNewPost(caption, img).then(res => console.log(res)).catch(err => console.log(err))
+      
+      }}>Upload</button>
     
     </div> : <> <h1 className='text-xl tracking-wide'>Drag photo and videos here</h1>
-    <Uploader /> </>}
+    <Uploader imgData={imgData} setAddCaption={setAddCaption}/>
+    
+    </>}
     
   
     </div></div>
