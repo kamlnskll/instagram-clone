@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Uploader from './Uploader'
-
+import { createNewPost } from '../utils/axios/postAPIs'
 
 type Props =  {
 isOpen: boolean,
@@ -8,20 +8,31 @@ isOpen: boolean,
 
 const NewPostModal = ({isOpen}: Props) => {
 
+const [img, setImg] = useState('')
 const [addCaption, setAddCaption] = useState(false)
+const [caption, setCaption] = useState('')
+
 
   return (
     isOpen ? (
-    <div className='absolute bg-white rounded-2xl h-1/2 w-1/2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+    <div className={addCaption ? `absolute bg-white rounded-2xl h-1/2 w-1/2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2` : `absolute bg-white rounded-2xl h-1/2 w-1/2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}>
     {addCaption ? <h1 className='font-bold text-center py-2 border-b'>Add a caption</h1> : <h1 className='font-bold text-center py-2 border-b'>Create a new post</h1> }
     <div className='h-full flex'>
     <div className='my-auto mx-auto'>
-    {addCaption ? <h1>Caption Space Here + IMG PREVIEW</h1> : <> <h1 className='text-xl tracking-wide'>Drag photo and videos here</h1>
+    {addCaption ? <div className='border'>
+    <textarea 
+    placeholder='Add a caption here'
+    className='outline-none border'
+    onChange={(e) => setCaption(e.target.value)}
+    /> 
+    <button onClick={() => {
+      console.log(caption)
+      console.log('fileInput here')}}>Upload</button>
+    
+    </div> : <> <h1 className='text-xl tracking-wide'>Drag photo and videos here</h1>
     <Uploader /> </>}
     
-    
-
-
+  
     </div></div>
   
     </div>

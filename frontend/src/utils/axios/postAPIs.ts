@@ -30,4 +30,22 @@ return data.data
 
 }
 
+export const createNewPost = async (caption: string, photo: string, ) => {
+try{
+
+const data = {
+caption: caption, 
+photo: photo,
+}
+
+const post = await axios.post(`${baseURL}${postURL}/createpost`, { data })
+return post
+
+} catch (err) {
+    console.log(err)
+}
+
+
+}
+
 

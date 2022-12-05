@@ -7,6 +7,7 @@ type Props = {
 }
 
 const Post = ({isOnFeed, post}: Props) => {
+
 return (
 isOnFeed ? (
     <div key={post._id} className='border rounded-xl'>

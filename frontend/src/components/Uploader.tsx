@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+
+
 
 const Uploader = () => {
 // @ts-ignore
@@ -47,7 +49,7 @@ console.log(base64Img)
 // Not sure
 
   return (
-    <div>
+    <div className=''>
         <form onSubmit={handleFileSubmit}>
         <input 
         type='file'
@@ -56,7 +58,9 @@ console.log(base64Img)
         value={fileInput}
         name='image'
         />
-        <button type='submit'>Submit</button>
+        <button className='flex border-2 mx-auto mt-4 px-2 rounded-lg font-semibold' type='submit' onClick={() => {
+            console.log(fileInput)        
+            }}>Next</button>
         </form>
 
     </div>
