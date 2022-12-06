@@ -29,8 +29,8 @@ await setImg(data)
     onChange={(e) => setCaption(e.target.value)}
     /> 
     <button onClick={() => {
-      console.log(caption, img)
-      createNewPost(caption, img).then(res => console.log(res)).catch(err => console.log(err))
+      // console.log(caption, img)
+      createNewPost(caption, img).then(res => console.log(res))
       
       }}>Upload</button>
     

@@ -1,13 +1,12 @@
 import Post from "../models/post.js";
 import User from "../models/user.js";
-import { uploadContent } from "../utils/uploadContent.js";
+// import { uploadContent } from "../utils/cloudinary.js";
 
 export const createPost = async (req, res) => {
 
-const photo = uploadContent(req.body.photo).then(res => res.data)
     // Basic for now, add images as requirement for post
-    const newPost = await new Post({
-       photo: photo,
+    const newPost = new Post({
+        photo: req.body.photo,
         caption: req.body.caption,
         postedBy: req.user,
     }
@@ -20,11 +19,11 @@ const photo = uploadContent(req.body.photo).then(res => res.data)
 
 }
 
-// export const uploadImgorVid = async (req, res) => {
+// export const uploadToCloudinary = async (req, res) => {
 // // We want to upload the image to cloudinary via BASE64 format.
 // // Find a way to combine this with the create post button function perhaps
+// uploadContent(req.body.image).catch((err) => res.status(err))
 
-// uploadContent(req.body.image).then((url) => res.send(url)).catch((err) => res.status(500))
 // }
 
 export const deletePost = async (req, res) => {

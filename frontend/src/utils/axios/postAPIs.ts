@@ -31,14 +31,13 @@ return data.data
 }
 
 export const createNewPost = async (caption: string, photo: string, ) => {
+
 try{
-
-const data = {
-caption: caption, 
-photo: photo,
-}
-
-const post = await axios.post(`${baseURL}${postURL}/createpost`, { data })
+const post = await axios.post(`${baseURL}${postURL}/createpost`, {
+    caption: caption, 
+    photo: photo,
+ })
+console.log(post)
 return post
 
 } catch (err) {

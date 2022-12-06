@@ -6,11 +6,15 @@ import bodyParser from 'body-parser'
 import userRoutes from './routes/user.js'
 import postRoutes from './routes/post.js'
 import profileRoutes from './routes/profile.js'
+import { multerUploads, dataUri } from './utils/multer.js'
+import { cloudinaryConfig, uploader } from './utils/cloudinary.js'
 
 const app = express()
 dotenv.config()
 app.use(cors())
 app.use(bodyParser.json({limit: '5mb'}))
+app.use('*', cloudinaryConfig)
+
 
 const connectToMongoCluster = async () => {
 try{
@@ -28,6 +32,28 @@ mongoose.connection.on('Disconnected', () => {
 app.get('/', (req, res) => {
     res.send('Hello World!')
   })
+
+app.post('/testupload', multerUploads, (req, res) =>{
+
+if(req.file){
+    const file = dataUri(req)
+    return uploader.upload(file).then((result) => {
+        const image = result.url
+        return res.status(200).json({
+            message: 'Your image has been uploaded to cloudinary',
+            data: {
+                image
+            }
+        })
+
+    }).catch((err) => res.status(400).json({
+        message: 'Something went wrong with your upload to cloudinary',
+        data: { err }
+    }))
+
+}
+// console.log('req.file:', req.file)
+})
   
 
 // Backend API routes
