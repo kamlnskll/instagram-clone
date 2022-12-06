@@ -1,16 +1,35 @@
 import Post from "../models/post.js";
 import User from "../models/user.js";
-// import { uploadContent } from "../utils/cloudinary.js";
+import { dataUri } from "../utils/multer.js";
 
 export const createPost = async (req, res) => {
 
-    // Basic for now, add images as requirement for post
-    const newPost = new Post({
-        photo: req.body.photo,
-        caption: req.body.caption,
-        postedBy: req.user,
+    if(req.file){
+        const file = dataUri(req)
+        return uploader.upload(file).then((result) => {
+            const image = result.url
+            return res.status(200).json({
+                message: 'Your image has been uploaded to cloudinary',
+                data: {
+                    image
+                }
+            }).then()
+            
+    
+        }).catch((err) => res.status(400).json({
+            message: 'Something went wrong with your upload to cloudinary',
+            data: { err }
+        }))
+    
     }
-    )
+
+    // Basic for now, add images as requirement for post
+    // const newPost = new Post({
+    //     photo: image,
+    //     caption: req.body.caption,
+    //     postedBy: req.user,
+    // })
+    
     try{
         const savedPost = await newPost.save()
         res.status(200).json(savedPost)
@@ -18,6 +37,27 @@ export const createPost = async (req, res) => {
     } catch (err) { throw err }
 
 }
+
+// export const uploadContent = (req, res) =>{
+
+//     if(req.file){
+//         const file = dataUri(req)
+//         return uploader.upload(file).then((result) => {
+//             const image = result.url
+//             return res.status(200).json({
+//                 message: 'Your image has been uploaded to cloudinary',
+//                 data: {
+//                     image
+//                 }
+//             })
+    
+//         }).catch((err) => res.status(400).json({
+//             message: 'Something went wrong with your upload to cloudinary',
+//             data: { err }
+//         }))
+    
+//     }}
+
 
 // export const uploadToCloudinary = async (req, res) => {
 // // We want to upload the image to cloudinary via BASE64 format.

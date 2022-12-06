@@ -33,27 +33,8 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
   })
 
-app.post('/testupload', multerUploads, (req, res) =>{
-
-if(req.file){
-    const file = dataUri(req)
-    return uploader.upload(file).then((result) => {
-        const image = result.url
-        return res.status(200).json({
-            message: 'Your image has been uploaded to cloudinary',
-            data: {
-                image
-            }
-        })
-
-    }).catch((err) => res.status(400).json({
-        message: 'Something went wrong with your upload to cloudinary',
-        data: { err }
-    }))
-
-}
-// console.log('req.file:', req.file)
-})
+  // Fix this
+app.post('/testupload', multerUploads)
   
 
 // Backend API routes
