@@ -6,7 +6,7 @@ export const createPost = async (req, res) => {
 
     if(req.file){
         const file = dataUri(req)
-        return uploader.upload(file).then((result) => {
+        return cloudinary.v2.uploader.upload(file).then((result) => {
             const image = result.url
             return res.status(200).json({
                 message: 'Your image has been uploaded to cloudinary',
