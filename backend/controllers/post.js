@@ -1,27 +1,26 @@
 import Post from "../models/post.js";
 import User from "../models/user.js";
-import { dataUri } from "../utils/multer.js";
 
 export const createPost = async (req, res) => {
 
-    if(req.file){
-        const file = dataUri(req)
-        return cloudinary.v2.uploader.upload(file).then((result) => {
-            const image = result.url
-            return res.status(200).json({
-                message: 'Your image has been uploaded to cloudinary',
-                data: {
-                    image
-                }
-            }).then()
+    // if(req.file){
+    //     const file = dataUri(req)
+    //     return cloudinary.v2.uploader.upload(file).then((result) => {
+    //         const image = result.url
+    //         return res.status(200).json({
+    //             message: 'Your image has been uploaded to cloudinary',
+    //             data: {
+    //                 image
+    //             }
+    //         }).then()
             
     
-        }).catch((err) => res.status(400).json({
-            message: 'Something went wrong with your upload to cloudinary',
-            data: { err }
-        }))
+    //     }).catch((err) => res.status(400).json({
+    //         message: 'Something went wrong with your upload to cloudinary',
+    //         data: { err }
+    //     }))
     
-    }
+    // }
 
     // Basic for now, add images as requirement for post
     // const newPost = new Post({
