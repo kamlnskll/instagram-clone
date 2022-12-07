@@ -1,33 +1,18 @@
 import Post from "../models/post.js";
 import User from "../models/user.js";
+import path from 'path'
+import DatauriParser from 'datauri/parser.js'
+import { uploader } from "../utils/cloudinary.js";
 
 export const createPost = async (req, res) => {
 
-    // if(req.file){
-    //     const file = dataUri(req)
-    //     return cloudinary.v2.uploader.upload(file).then((result) => {
-    //         const image = result.url
-    //         return res.status(200).json({
-    //             message: 'Your image has been uploaded to cloudinary',
-    //             data: {
-    //                 image
-    //             }
-    //         }).then()
-            
-    
-    //     }).catch((err) => res.status(400).json({
-    //         message: 'Something went wrong with your upload to cloudinary',
-    //         data: { err }
-    //     }))
-    
-    // }
 
-    // Basic for now, add images as requirement for post
-    // const newPost = new Post({
-    //     photo: image,
-    //     caption: req.body.caption,
-    //     postedBy: req.user,
-    // })
+
+    const newPost = new Post({
+        photo: req.blahblahblah,
+        caption: req.body.caption,
+        postedBy: req.user,
+    })
     
     try{
         const savedPost = await newPost.save()
@@ -37,33 +22,25 @@ export const createPost = async (req, res) => {
 
 }
 
-// export const uploadContent = (req, res) =>{
+export const uploadContentToCloudinary = (req, res) => {
+    const parser = new DatauriParser()
 
-//     if(req.file){
-//         const file = dataUri(req)
-//         return uploader.upload(file).then((result) => {
-//             const image = result.url
-//             return res.status(200).json({
-//                 message: 'Your image has been uploaded to cloudinary',
-//                 data: {
-//                     image
-//                 }
-//             })
+    const extName = path.extname(req.file.originalname).toString();
+    const file64 = parser.format(extName, req.file.buffer);
+    return uploader.upload(file64.content).then((result) => {
+        const image = result.url
+        return res.status(200).json({
+            message: 'Your image has been uploaded to cloudinary',
+            data: {
+                image
+            }
+        })}).catch((err) => res.status(400).json({
+            message: 'Something went wrong with your upload to cloudinary',
+            data: { err }
+        }))
     
-//         }).catch((err) => res.status(400).json({
-//             message: 'Something went wrong with your upload to cloudinary',
-//             data: { err }
-//         }))
-    
-//     }}
 
-
-// export const uploadToCloudinary = async (req, res) => {
-// // We want to upload the image to cloudinary via BASE64 format.
-// // Find a way to combine this with the create post button function perhaps
-// uploadContent(req.body.image).catch((err) => res.status(err))
-
-// }
+}
 
 export const deletePost = async (req, res) => {
 
