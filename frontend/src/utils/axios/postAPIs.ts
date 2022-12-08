@@ -30,4 +30,38 @@ return data.data
 
 }
 
+export const createNewPost = async (caption: string, photo: string, ) => {
+
+try{
+
+const post = await axios.post(`${baseURL}${postURL}/createpost`, {
+    caption: caption, 
+    photo: photo,
+ })
+console.log(post)
+return post
+
+} catch (err) {
+    console.log(err)
+}
+
+
+}
+
+// export const sendImgtoCloudinary = async (formData: any) => {
+
+// const data = { image: formData }
+
+
+// try{
+//     const getLink = await axios.post(`${baseURL}${postURL}/upload`, data, { headers: {
+//     "Content-Type": "multipart/form-data",
+//     }})
+//     console.log(getLink)
+//     return getLink
+// }
+//  catch(err) {
+//     console.log(err)
+// }
+// }
 

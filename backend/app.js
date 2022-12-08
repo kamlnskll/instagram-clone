@@ -6,11 +6,15 @@ import bodyParser from 'body-parser'
 import userRoutes from './routes/user.js'
 import postRoutes from './routes/post.js'
 import profileRoutes from './routes/profile.js'
+import { cloudinaryConfig } from './utils/cloudinary.js'
+
 
 const app = express()
 dotenv.config()
 app.use(cors())
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '5mb'}))
+app.use('*', cloudinaryConfig)
+
 
 const connectToMongoCluster = async () => {
 try{
@@ -28,7 +32,6 @@ mongoose.connection.on('Disconnected', () => {
 app.get('/', (req, res) => {
     res.send('Hello World!')
   })
-  
 
 // Backend API routes
 app.use('/api/posts', postRoutes)
