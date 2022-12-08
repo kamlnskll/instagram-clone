@@ -51,6 +51,12 @@ await imgData(base64Img).then(setAddCaption(true)).then(console.log('img data va
 
 }
 
+const sendImgtoBackend = async () => {
+
+
+    
+}
+
 // Maybe for multistep form including caption it can be possible to save the base64 conversion to a context provider and then grab it from the other part of the form with the caption.
 // Not sure
 

@@ -33,7 +33,6 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
   })
 
-
 // Backend API routes
 app.use('/api/posts', postRoutes)
 app.use('/api/user', userRoutes)

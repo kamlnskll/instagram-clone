@@ -33,6 +33,7 @@ return data.data
 export const createNewPost = async (caption: string, photo: string, ) => {
 
 try{
+
 const post = await axios.post(`${baseURL}${postURL}/createpost`, {
     caption: caption, 
     photo: photo,
@@ -47,4 +48,14 @@ return post
 
 }
 
+export const sendImgtoCloudinary = async () => {
+
+try{
+    const getLink = await axios.post(`${baseURL}${postURL}/upload`)
+    return getLink.data
+}
+ catch(err) {
+    console.log(err)
+}
+}
 

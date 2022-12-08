@@ -6,10 +6,8 @@ import { uploader } from "../utils/cloudinary.js";
 
 export const createPost = async (req, res) => {
 
-
-
     const newPost = new Post({
-        photo: req.blahblahblah,
+        photo: req.body.image,
         caption: req.body.caption,
         postedBy: req.user,
     })
