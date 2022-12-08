@@ -33,6 +33,7 @@ const { logout } = logoutUser()
   return (
 <>
     <nav className='h-screen bg-white border-r border-gray-300 w-1/4'>
+    <h1 className='text-4xl px-12 mt-4'>Instaclone</h1>
     <NewPostModal isOpen={isOpen} />
     <div className='text-xl px-4 mx-auto h-full pt-8'>
     <Link to={'/'} className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full'> 
@@ -55,7 +56,7 @@ const { logout } = logoutUser()
     <NotificationsUnselected />
     <h1>Notifications</h1>
     </ul>
-    <ul className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full' onClick={() => setIsOpen(!isOpen)}>
+    <ul className='pl-2 flex gap-4 py-2 my-2 cursor-pointer hover:bg-gray-50 hover:rounded-full' onClick={() => setIsOpen(!isOpen)}>
     <CreateUnselected />
     <h1>Create</h1>
     </ul>

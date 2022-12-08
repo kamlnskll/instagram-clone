@@ -16,7 +16,7 @@ export const createPost = async (req, res) => {
     try{
         const savedPost = await newPost.save()
         res.status(200).json(savedPost)
-        User.findOneAndUpdate({_id: req.user}, { $push: {posts: savedPost._id}})
+        User.findOneAndUpdate({_id: req.user}, { $push: {posts: savedPost._id}}, {new: true})
         // User.findOneAndUpdate({_id: req.user}, { $inc: {postCount: 1}}) ----> Not incrementing for whatever reason.
         console.log('New post created')
     } catch (err) { throw err }

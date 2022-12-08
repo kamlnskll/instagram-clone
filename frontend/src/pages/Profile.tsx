@@ -55,10 +55,11 @@ getUserbyUsername(username).then((res) => {setUserData(res)
       </div>
 
       
-    <div className='flex justify-evenly'>
+    <div className='grid grid-cols-3'>
       {post.map((posts) => {
         return (
           <Post isOnFeed={false} post={posts}/>
+          
       )} )}
     </div>
     </div>
