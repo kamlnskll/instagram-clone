@@ -21,7 +21,9 @@ console.log(res)})
       <div className='mx-auto'>
       {post.map((eachPost) => {
         return (
+      <div className='pt-4 pb-6'>
       <Post isOnFeed={true} post={eachPost}/>
+      </div>
       )})}
       </div>
       </div>

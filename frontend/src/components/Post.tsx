@@ -11,7 +11,7 @@ const Post = ({isOnFeed, post}: Props) => {
 return (
 isOnFeed ? (
     <div key={post._id} className='border rounded-xl'>
-      <Link to={`/profile/${post.postedBy.userName}`} className='flex gap-3 my-auto py-3 border pl-4'>
+      <Link to={`/profile/${post.postedBy.userName}`} className='flex gap-3 my-auto py-3 border-b pl-4'>
         <img className='w-10 h-10 rounded-full'src={post.postedBy.profilePic}/>
         <h1 className='my-auto hover:font-semibold'>{post.postedBy.userName}</h1>
       </Link>
