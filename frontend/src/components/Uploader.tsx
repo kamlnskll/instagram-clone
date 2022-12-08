@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 type Props = {
 
-imgData: any
+imgData: any,
 setAddCaption: any,
 
 }
