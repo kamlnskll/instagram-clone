@@ -6,8 +6,9 @@ import { uploader } from "../utils/cloudinary.js";
 
 export const createPost = async (req, res) => {
 
+    console.log(req.body)
     const newPost = new Post({
-        photo: req.body.image,
+        photo: req.body.photo,
         caption: req.body.caption,
         postedBy: req.user,
     })
@@ -21,8 +22,9 @@ export const createPost = async (req, res) => {
 }
 
 export const uploadContentToCloudinary = (req, res) => {
+    
+    console.log('req.file: ', req.file)
     const parser = new DatauriParser()
-
     const extName = path.extname(req.file.originalname).toString();
     const file64 = parser.format(extName, req.file.buffer);
     return uploader.upload(file64.content).then((result) => {
