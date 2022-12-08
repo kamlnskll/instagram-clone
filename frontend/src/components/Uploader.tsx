@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { sendImgtoCloudinary } from '../utils/axios/postAPIs'
 
 type Props = {
 
@@ -14,6 +15,9 @@ const [fileInput, setFileInput] = useState('')
 const [previewSource, setPreviewSource] = useState('')
 // @ts-ignore
 const [selectedFile, setSelectedFile] = useState('')
+
+// @ts-ignore
+const [image, setImage] = useState('')
 
 const handleFileInputChange = (e: any) => {
     const file = e.target.files[0]
@@ -51,9 +55,15 @@ await imgData(base64Img).then(setAddCaption(true)).then(console.log('img data va
 
 }
 
+const handleImg = (e: any) => {
+    console.log(e.target.files)
+    setImage(e.target.files[0])
+}
+
 const sendImgtoBackend = async () => {
-
-
+const formData = new FormData()
+formData.append('image', image)
+sendImgtoCloudinary(formData).then((res) => console.log(res))
     
 }
 
@@ -72,7 +82,11 @@ const sendImgtoBackend = async () => {
         />
         <button className='flex border-2 mx-auto mt-4 px-2 rounded-lg font-semibold' type='submit' onClick={() => {console.log('Btn submitted')}}>Next</button>
         </form>
-
+        <div className='bg-blue-400 border p-3'>
+        <h1>TESTING PURPOSES ONLY FOR AXIOS</h1>
+        <input type='file' name='file' onChange={handleImg} />
+        <button onClick={sendImgtoBackend}>SUBMIT TEST IMAGE!!!!</button>
+        </div>
     </div>
   )
 }

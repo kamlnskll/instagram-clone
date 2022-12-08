@@ -48,11 +48,17 @@ return post
 
 }
 
-export const sendImgtoCloudinary = async () => {
+export const sendImgtoCloudinary = async (formData: any) => {
+
+const data = { image: formData }
+
 
 try{
-    const getLink = await axios.post(`${baseURL}${postURL}/upload`)
-    return getLink.data
+    const getLink = await axios.post(`${baseURL}${postURL}/upload`, data, { headers: {
+    "Content-Type": "multipart/form-data",
+    }})
+    console.log(getLink)
+    return getLink
 }
  catch(err) {
     console.log(err)
