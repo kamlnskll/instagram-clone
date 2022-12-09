@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import { getUserbyUsername } from '../utils/axios/userAPIs'
 import Post from '../components/Post'
+import { SettingsIcon } from '../components/icons/Settings'
 
 const Profile = () => {
 
@@ -38,7 +39,9 @@ getUserbyUsername(username).then((res) => {setUserData(res)
       <div className='flex gap-8 pb-6'>
       <h1 className='text-2xl'>{userData.userName}</h1>
       <button className='border font-semibold px-2 rounded-sm'>Edit profile</button>
-      <h1>Setting Button</h1>
+      <div>
+      <SettingsIcon />
+      </div>
       </div>
       {/* Line-2 Post, follower, following count */}
       <div className='flex gap-8 pb-4'>

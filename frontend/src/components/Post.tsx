@@ -52,9 +52,16 @@ isOnFeed ? (
       </div>
     </div>
   ) : (
-<div>
-<div key={post._id} className='cursor-pointer hover:bg-black'>
+<div className='mx-auto'>
+<div className='hover:bg-black relative'>
+  {/* Comment and Likes Count on hover --> doesn't work yet */}
+{/* <div className='absolute flex border text-5xl'>
+<h1 className='hover:visible text-white font-bold mx-auto my-auto'>{post.numberOfLikes}</h1>
+<h1 className='hover:visible text-white font-bold mx-auto my-auto'>{post.numberOfComments}</h1>
+</div> */}
+<div key={post._id} className='my-6 cursor-pointer hover:opacity-25'>
 <img className='h-[256px] w-[256px]' src={post.photo}/>
+</div>
 </div>
 </div>
   ))
