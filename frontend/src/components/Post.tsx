@@ -1,5 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FavoriteSelected, FavoriteUnselected } from './icons/Like'
+import { CommentIcon } from './icons/Comment'
+import { ShareIcon } from './icons/Share'
+import { BookmarkSelected, BookmarkUnselected } from './icons/Bookmark'
 
 type Props = {
   isOnFeed: boolean,
@@ -16,7 +20,7 @@ isOnFeed ? (
         <h1 className='my-auto hover:font-semibold'>{post.postedBy.userName}</h1>
       </Link>
       <div>
-      <img className='w-[468px] h-[468px] object-fill' src={post.photo} />
+      <img className='w-[468px] h-[468px] object-fill border-b' src={post.photo} />
       </div>
       <div className='flex justify-between mx-4 pt-4'>
       <div className='flex'>
