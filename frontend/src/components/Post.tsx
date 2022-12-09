@@ -4,6 +4,7 @@ import { FavoriteSelected, FavoriteUnselected } from './icons/Like'
 import { CommentIcon } from './icons/Comment'
 import { ShareIcon } from './icons/Share'
 import { BookmarkSelected, BookmarkUnselected } from './icons/Bookmark'
+import dayjs from 'dayjs'
 
 type Props = {
   isOnFeed: boolean,
@@ -12,12 +13,14 @@ type Props = {
 
 const Post = ({isOnFeed, post}: Props) => {
 
+const formattedDate = dayjs(post.createdAt).format(`MM DD`)
+
 return (
 isOnFeed ? (
     <div key={post._id} className='border rounded-xl'>
       <Link to={`/profile/${post.postedBy.userName}`} className='flex gap-3 my-auto py-3 border-b pl-4'>
         <img className='w-10 h-10 rounded-full'src={post.postedBy.profilePic}/>
-        <h1 className='my-auto hover:font-semibold'>{post.postedBy.userName}</h1>
+        <h1 className='my-auto font-semibold'>{post.postedBy.userName}</h1>
       </Link>
       <div>
       <img className='w-[468px] h-[468px] object-fill border-b' src={post.photo} />
@@ -37,8 +40,11 @@ isOnFeed ? (
       <h2>Liked by 'insert names heres'</h2>
       </div>
       <div className='ml-4 py-3'>
+      <Link to={`/profile/${post.postedBy.userName}`} className='flex gap-2'>
+      <h2 className='font-semibold'>{post.postedBy.userName}</h2>
       <h2>{post.caption}</h2>
-      <h3>Post Timestamp</h3>
+      </Link>
+      <h3>{formattedDate}</h3>
       <h3>Comments will go here</h3>
       </div>
     </div>
