@@ -23,22 +23,24 @@ isOnFeed ? (
       <img className='w-[468px] h-[468px] object-fill border-b' src={post.photo} />
       </div>
       <div className='flex justify-between mx-4 pt-4'>
-      <div className='flex'>
-      <h1>Heart</h1>
-      <h1>Comment</h1>
-      <h1>Send</h1>
+      <div className='flex gap-3'>
+      <FavoriteUnselected />
+      <CommentIcon />
+      <ShareIcon />
       </div>
       <div>
-        <h1>Bookmark</h1>
+        <BookmarkUnselected />
       </div>
       </div>
-      <div className='flex'>
-      <h1>PFPS</h1>
+      <div className='flex ml-4 pt-4'>
+      <h1></h1>
       <h2>Liked by 'insert names heres'</h2>
       </div>
+      <div className='ml-4 py-3'>
       <h2>{post.caption}</h2>
       <h3>Post Timestamp</h3>
       <h3>Comments will go here</h3>
+      </div>
     </div>
   ) : (
 <div>
