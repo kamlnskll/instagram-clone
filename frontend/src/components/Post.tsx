@@ -1,5 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { FavoriteSelected, FavoriteUnselected } from './icons/Like'
+import { CommentIcon } from './icons/Comment'
+import { ShareIcon } from './icons/Share'
+import { BookmarkSelected, BookmarkUnselected } from './icons/Bookmark'
+import dayjs from 'dayjs'
+import CommentForm from './CommentForm'
 
 type Props = {
   isOnFeed: boolean,
@@ -8,33 +14,42 @@ type Props = {
 
 const Post = ({isOnFeed, post}: Props) => {
 
+const formattedDate = dayjs(post.createdAt).format(`MMMM D`)
+
 return (
 isOnFeed ? (
     <div key={post._id} className='border rounded-xl'>
       <Link to={`/profile/${post.postedBy.userName}`} className='flex gap-3 my-auto py-3 border-b pl-4'>
         <img className='w-10 h-10 rounded-full'src={post.postedBy.profilePic}/>
-        <h1 className='my-auto hover:font-semibold'>{post.postedBy.userName}</h1>
+        <h1 className='my-auto font-semibold'>{post.postedBy.userName}</h1>
       </Link>
       <div>
-      <img className='w-[468px] h-[468px] object-fill' src={post.photo} />
+      <img className='w-[468px] h-[468px] object-fill border-b' src={post.photo} />
       </div>
       <div className='flex justify-between mx-4 pt-4'>
-      <div className='flex'>
-      <h1>Heart</h1>
-      <h1>Comment</h1>
-      <h1>Send</h1>
+      <div className='flex gap-3'>
+      <FavoriteUnselected />
+      <CommentIcon />
+      <ShareIcon />
       </div>
       <div>
-        <h1>Bookmark</h1>
+        <BookmarkUnselected />
       </div>
       </div>
-      <div className='flex'>
-      <h1>PFPS</h1>
+      <div className='flex ml-4 pt-4'>
+      <h1></h1>
       <h2>Liked by 'insert names heres'</h2>
       </div>
+      <div className='ml-4 py-3'>
+      <div className='flex gap-2'>
+      <Link to={`/profile/${post.postedBy.userName}`}>
+      <h2 className='font-semibold'>{post.postedBy.userName}</h2>
+      </Link>
       <h2>{post.caption}</h2>
-      <h3>Post Timestamp</h3>
-      <h3>Comments will go here</h3>
+      </div>
+      <CommentForm />
+      <h3 className='text-xs text-gray-500 mt-2'>{formattedDate}</h3>
+      </div>
     </div>
   ) : (
 <div>
