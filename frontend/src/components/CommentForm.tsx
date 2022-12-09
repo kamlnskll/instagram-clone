@@ -2,7 +2,7 @@ import React from 'react'
 
 const CommentForm = () => {
   return (
-    <div>CommentForm</div>
+    <div className='hidden' >Add a comment...</div>
   )
 }
 

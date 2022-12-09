@@ -5,6 +5,7 @@ import { CommentIcon } from './icons/Comment'
 import { ShareIcon } from './icons/Share'
 import { BookmarkSelected, BookmarkUnselected } from './icons/Bookmark'
 import dayjs from 'dayjs'
+import CommentForm from './CommentForm'
 
 type Props = {
   isOnFeed: boolean,
@@ -13,7 +14,7 @@ type Props = {
 
 const Post = ({isOnFeed, post}: Props) => {
 
-const formattedDate = dayjs(post.createdAt).format(`MM DD`)
+const formattedDate = dayjs(post.createdAt).format(`MMMM D`)
 
 return (
 isOnFeed ? (
@@ -40,12 +41,14 @@ isOnFeed ? (
       <h2>Liked by 'insert names heres'</h2>
       </div>
       <div className='ml-4 py-3'>
-      <Link to={`/profile/${post.postedBy.userName}`} className='flex gap-2'>
+      <div className='flex gap-2'>
+      <Link to={`/profile/${post.postedBy.userName}`}>
       <h2 className='font-semibold'>{post.postedBy.userName}</h2>
-      <h2>{post.caption}</h2>
       </Link>
-      <h3>{formattedDate}</h3>
-      <h3>Comments will go here</h3>
+      <h2>{post.caption}</h2>
+      </div>
+      <CommentForm />
+      <h3 className='text-xs text-gray-500 mt-2'>{formattedDate}</h3>
       </div>
     </div>
   ) : (
