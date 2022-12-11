@@ -90,7 +90,7 @@ export const getFollowingPosts = asyncHandler(async (req, res, next) => {
 
 export const followUser = asyncHandler(async (req, res, next) => {
 
-const user = await User.findOne({userName: req.params.username}).select('_id followers')
+const user = await User.findOne({userName: req.params.username}).select('_id followers following followerCount followingCount')
 const selectedUserId = user._id
 
 if(selectedUserId == req.user){
@@ -105,8 +105,9 @@ else {
     
 try{
 
-await User.findByIdAndUpdate(selectedUserId, {$push: {followers: req.user}}, {$inc: {followerCount: 1}}).then(User.findByIdAndUpdate(req.user, {$push: {following: user._id}}, {$inc: {followingCount: 1}}))
-
+await User.findOneAndUpdate({_id: selectedUserId}, { $push: {followers: req.user}, $inc: { followerCount: 1}})
+await User.findOneAndUpdate({_id: req.user}, { $push: {following: user._id}, $inc: {followingCount: 1}}).then(console.log('User Followed'))
+return res
 } catch (err){
         console.log(err)
 }
@@ -135,9 +136,10 @@ const selectedUserId = user._id
         
     try{
     
-    await User.findByIdAndUpdate(selectedUserId, {$pull: {followers: req.user}}, {$inc: {followerCount: -1}}).then(User.findByIdAndUpdate(req.user, {$pull: {following: user._id}}, {$inc: {followingCount: -1}}, {new: true}))
-    
-    } catch (err ){
+    await User.findByIdAndUpdate(selectedUserId, { $pull: {followers: req.user}, $inc: {followerCount: -1}})
+    await User.findByIdAndUpdate(req.user, { $pull: {following: user._id}, $inc: {followingCount: -1}}).then(console.log('User unfollowed'))
+    return res
+} catch (err ){
             console.log(err)
     }
     
