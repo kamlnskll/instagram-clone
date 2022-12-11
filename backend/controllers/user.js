@@ -105,11 +105,11 @@ else {
     
 try{
 
-await User.findByIdAndUpdate(selectedUserId, {$push: {followers: req.user}}, {$inc: {followerCount: 1}}).then(User.findByIdAndUpdate(req.user, {$push: {following: user._id}}, {$inc: {following: 1}}))
+await User.findByIdAndUpdate(selectedUserId, {$push: {followers: req.user}}, {$inc: {followerCount: 1}}).then(User.findByIdAndUpdate(req.user, {$push: {following: user._id}}, {$inc: {followingCount: 1}}))
 
-} catch { err } (
+} catch (err){
         console.log(err)
-)
+}
 
 }
 
@@ -135,11 +135,11 @@ const selectedUserId = user._id
         
     try{
     
-    await User.findByIdAndUpdate(selectedUserId, {$pull: {followers: req.user}}, {$inc: {followerCount: -1}}).then(User.findByIdAndUpdate(req.user, {$pull: {following: user._id}}, {$inc: {following: -1}}))
+    await User.findByIdAndUpdate(selectedUserId, {$pull: {followers: req.user}}, {$inc: {followerCount: -1}}).then(User.findByIdAndUpdate(req.user, {$pull: {following: user._id}}, {$inc: {followingCount: -1}}, {new: true}))
     
-    } catch { err } (
+    } catch (err ){
             console.log(err)
-    )
+    }
     
     }
 

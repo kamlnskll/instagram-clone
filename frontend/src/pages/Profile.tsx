@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
-import { getUserbyUsername } from '../utils/axios/userAPIs'
+import { getUserbyUsername, followUser, unfollowUser} from '../utils/axios/userAPIs'
 import Post from '../components/Post'
 import { SettingsIcon } from '../components/icons/Settings'
 
@@ -44,7 +44,7 @@ getUserbyUsername(username).then((res) => {setUserData(res)
       <div>
       <SettingsIcon />
       </div>  </> ) : null }
-      {userData.isThisUserMe ? ( null ) : <button className='border font-semibold px-4 rounded-sm text-white bg-blue-500 hover:bg-blue-600'>Follow</button>}
+      {userData.isThisUserMe ? ( null ) : <button className='border font-semibold px-4 rounded-sm text-white bg-blue-500 hover:bg-blue-600' onClick={() => followUser(username)}>Follow</button>}
       </div>
       {/* Line-2 Post, follower, following count */}
       <div className='flex gap-8 pb-4'>
