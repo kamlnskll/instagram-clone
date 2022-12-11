@@ -10,7 +10,6 @@ const [post, setPost] = useState([])
 useEffect(() => {
 getAllPosts().then((res) => {setPost(res)
 console.log(res)})
-
 // console.log(res)})
 }, [])
 

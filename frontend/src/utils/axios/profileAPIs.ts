@@ -18,3 +18,13 @@ export const getProfileUsernameandProfilePic = async () => {
     } catch (error) {console.log(error)}
     
     }
+
+export const getProfileId = async () => {
+
+        try {
+        const data = await axios.get(`${baseURL}${profileURL}/getprofiledata`)
+        return data.data
+        
+        } catch (error) {console.log(error)}
+        
+        }

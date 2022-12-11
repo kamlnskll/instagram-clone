@@ -88,13 +88,31 @@ export const getSubscribedPosts = async (req, res) => {
 export const getPostById = async (req, res) => {
 
 
+
 }
 
-export const likePost = async (req, res) => {
+export const likePostToggle = async (req, res) => {
+
+const post = await Post.findOne({_id: req.params.postid})
+const selectedPost = post._id
+
+const isLikedByUser = post.likes.includes(req.user)
+
+try{
+
+if(!isLikedByUser){
+await Post.findByIdAndUpdate(selectedPost, { $push: { likes: req.user}, $inc: { numberOfLikes: 1 } })
+
+} if(isLikedByUser) {
+
+await Post.findByIdAndUpdate(selectedPost, { $pull: { likes: req.user}, $inc: { numberOfLikes: -1 } })
 
 
-    
-    
+} else{
+    console.log('No post with that ID found')
+} } catch (err) {
+    console.log(err)
 }
 
+}
 

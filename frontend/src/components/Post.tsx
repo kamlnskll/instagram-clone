@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FavoriteSelected, FavoriteUnselected } from './icons/Like'
 import { CommentIcon } from './icons/Comment'
@@ -6,15 +6,20 @@ import { ShareIcon } from './icons/Share'
 import { BookmarkSelected, BookmarkUnselected } from './icons/Bookmark'
 import dayjs from 'dayjs'
 import CommentForm from './CommentForm'
+import { likePostToggle } from '../utils/axios/postAPIs'
+import { getProfileId } from '../utils/axios/profileAPIs'
 
 type Props = {
   isOnFeed: boolean,
   post: any,
+
 }
 
 const Post = ({isOnFeed, post}: Props) => {
 
 const formattedDate = dayjs(post.createdAt).format(`MMMM D`)
+
+
 
 return (
 isOnFeed ? (
@@ -28,7 +33,9 @@ isOnFeed ? (
       </div>
       <div className='flex justify-between mx-4 pt-4'>
       <div className='flex gap-3'>
-      <FavoriteUnselected />
+      <div onClick={() => likePostToggle(post._id)}>
+     <FavoriteUnselected />
+      </div>
       <CommentIcon />
       <ShareIcon />
       </div>

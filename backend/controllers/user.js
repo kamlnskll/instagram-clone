@@ -151,8 +151,6 @@ export const getUserbyUsername = asyncHandler(async (req, res, next) => {
 
 const user = await User.findOne({userName: req.params.username}).select('_id userName fullName profilePic followers following followerCount followingCount postCount bio posts').populate("posts")
 
-
-
    if(user){
         res.status(200).json({
             userId: user._id,
