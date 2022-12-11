@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { registerNewUser, loginUser, getUserbyUsername,  } from '../controllers/user.js'
+import { registerNewUser, loginUser, getUserbyUsername, followUser, unfollowUser,  } from '../controllers/user.js'
 import { requireLogin } from '../utils/auth.js'
 
 
@@ -11,7 +11,7 @@ router.post('/register', registerNewUser)
 router.post('/login', loginUser)
 router.use(requireLogin)
 router.get('/:username', getUserbyUsername)
-router.post('/:username/follow')
-router.post('/:username/unfollow')
+router.post('/:username/follow', followUser)
+router.post('/:username/unfollow', unfollowUser)
 
 export default router

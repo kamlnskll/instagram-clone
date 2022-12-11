@@ -90,16 +90,68 @@ export const getFollowingPosts = asyncHandler(async (req, res, next) => {
 
 export const followUser = asyncHandler(async (req, res, next) => {
 
+const user = await User.findOne({userName: req.params.username}).select('_id followers following followerCount followingCount')
+const selectedUserId = user._id
+
+if(selectedUserId == req.user){
+    console.log('You cannot follow yourself')
+}
+
+if(user.followers.includes(req.user)){
+ console.log('You are already following this account')
+}
+
+else {
+    
+try{
+
+await User.findOneAndUpdate({_id: selectedUserId}, { $push: {followers: req.user}, $inc: { followerCount: 1}}, {new: true})
+await User.findOneAndUpdate({_id: req.user}, { $push: {following: user._id}, $inc: {followingCount: 1}}, {new: true}).then(console.log('User Followed'))
+return res
+} catch (err){
+        console.log(err)
+}
+
+}
+
+
+
 
 })
 
 export const unfollowUser = asyncHandler(async (req, res, next) => {
+
+const user = await User.findOne({userName: req.params.username}).select('_id followers')
+const selectedUserId = user._id
+    
+    if(selectedUserId == req.user){
+        console.log('You cannot unfollow yourself')
+    }
+    
+    if(!user.followers.includes(req.user)){
+     console.log('You are already not following this account')
+    }
+    
+    else {
+        
+    try{
+    
+    await User.findByIdAndUpdate(selectedUserId, { $pull: {followers: req.user}, $inc: {followerCount: -1}}, {new: true})
+    await User.findByIdAndUpdate(req.user, { $pull: {following: user._id}, $inc: {followingCount: -1}}, {new: true}).then(console.log('User unfollowed'))
+    return res
+} catch (err ){
+            console.log(err)
+    }
+    
+    }
 
 })
 
 export const getUserbyUsername = asyncHandler(async (req, res, next) => {
 
 const user = await User.findOne({userName: req.params.username}).select('_id userName fullName profilePic followers following followerCount followingCount postCount bio posts').populate("posts")
+
+
 
    if(user){
         res.status(200).json({
@@ -114,7 +166,8 @@ const user = await User.findOne({userName: req.params.username}).select('_id use
             postCount: user.postCount,
             bio: user.bio,
             posts: user.posts,
-            isThisUserMe: await req.user == user._id
+            isThisUserMe: await req.user == user._id,
+            isFollowingUser: user.followers.includes(req.user)
         })        
     }
     else{
