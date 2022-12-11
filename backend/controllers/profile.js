@@ -6,7 +6,7 @@ import asyncHandler from "express-async-handler";
 
 export const getUsernameofLoggedInUser = asyncHandler (async (req, res) => {
     try{
-    const findUser = await User.findById(req.user).select('userName profilePic -_id')
+    const findUser = await User.findById(req.user).select('userName profilePic _id')
     // 'following', 'posts')
     res.status(200).json(findUser)
 
