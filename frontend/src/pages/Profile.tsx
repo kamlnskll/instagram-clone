@@ -17,6 +17,8 @@ followers: '',
 followingCount: '',
 followerCount: '',
 bio: '',
+postCount: '',
+isThisUserMe: (false)
 })
 
 
@@ -38,14 +40,15 @@ getUserbyUsername(username).then((res) => {setUserData(res)
       {/* Line-1 Username, Edit btns */}
       <div className='flex gap-8 pb-6'>
       <h1 className='text-2xl'>{userData.userName}</h1>
-      <button className='border font-semibold px-2 rounded-sm'>Edit profile</button>
+      {userData.isThisUserMe ? ( <><button className='border font-semibold px-2 rounded-sm'>Edit profile</button>
       <div>
       <SettingsIcon />
-      </div>
+      </div>  </> ) : null }
+      {userData.isThisUserMe ? ( null ) : <button className='border font-semibold px-4 rounded-sm text-white bg-blue-500 hover:bg-blue-600'>Follow</button>}
       </div>
       {/* Line-2 Post, follower, following count */}
       <div className='flex gap-8 pb-4'>
-        <h1><span className='font-semibold'>0 </span>posts</h1>
+        <h1><span className='font-semibold'>{userData.postCount} </span>posts</h1>
         <h1><span className='font-semibold'>{userData.followerCount} </span>followers</h1>
         <h1><span className='font-semibold'>{userData.followingCount} </span>following</h1>
       </div>

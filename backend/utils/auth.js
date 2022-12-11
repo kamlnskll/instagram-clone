@@ -18,6 +18,7 @@ if(!authorization){
     const {id} = jwt.verify(token, process.env.JWT_SECRET_ACCESS_TOKEN)
 
     req.user = id
+    // console.log("Req User", req.user)
     next()
 
     } catch (error){
