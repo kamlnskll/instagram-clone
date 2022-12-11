@@ -105,8 +105,8 @@ else {
     
 try{
 
-await User.findOneAndUpdate({_id: selectedUserId}, { $push: {followers: req.user}, $inc: { followerCount: 1}})
-await User.findOneAndUpdate({_id: req.user}, { $push: {following: user._id}, $inc: {followingCount: 1}}).then(console.log('User Followed'))
+await User.findOneAndUpdate({_id: selectedUserId}, { $push: {followers: req.user}, $inc: { followerCount: 1}}, {new: true})
+await User.findOneAndUpdate({_id: req.user}, { $push: {following: user._id}, $inc: {followingCount: 1}}, {new: true}).then(console.log('User Followed'))
 return res
 } catch (err){
         console.log(err)
@@ -136,8 +136,8 @@ const selectedUserId = user._id
         
     try{
     
-    await User.findByIdAndUpdate(selectedUserId, { $pull: {followers: req.user}, $inc: {followerCount: -1}})
-    await User.findByIdAndUpdate(req.user, { $pull: {following: user._id}, $inc: {followingCount: -1}}).then(console.log('User unfollowed'))
+    await User.findByIdAndUpdate(selectedUserId, { $pull: {followers: req.user}, $inc: {followerCount: -1}}, {new: true})
+    await User.findByIdAndUpdate(req.user, { $pull: {following: user._id}, $inc: {followingCount: -1}}, {new: true}).then(console.log('User unfollowed'))
     return res
 } catch (err ){
             console.log(err)
@@ -150,6 +150,8 @@ const selectedUserId = user._id
 export const getUserbyUsername = asyncHandler(async (req, res, next) => {
 
 const user = await User.findOne({userName: req.params.username}).select('_id userName fullName profilePic followers following followerCount followingCount postCount bio posts').populate("posts")
+
+
 
    if(user){
         res.status(200).json({
@@ -164,7 +166,8 @@ const user = await User.findOne({userName: req.params.username}).select('_id use
             postCount: user.postCount,
             bio: user.bio,
             posts: user.posts,
-            isThisUserMe: await req.user == user._id
+            isThisUserMe: await req.user == user._id,
+            isFollowingUser: user.followers.includes(req.user)
         })        
     }
     else{

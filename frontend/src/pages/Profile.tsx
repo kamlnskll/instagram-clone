@@ -18,7 +18,8 @@ followingCount: 0,
 followerCount: 0,
 bio: '',
 postCount: '',
-isThisUserMe: (false)
+isThisUserMe: (false),
+isFollowingUser: (false)
 })
 
 
@@ -44,7 +45,12 @@ getUserbyUsername(username).then((res) => {setUserData(res)
       <div>
       <SettingsIcon />
       </div>  </> ) : null }
-      {userData.isThisUserMe ? ( null ) : <> <button className='border font-semibold px-4 rounded-sm text-white bg-blue-500 hover:bg-blue-600' onClick={() => followUser(username)}>Follow</button> <button className='border font-semibold px-4 rounded-sm text-white bg-blue-500 hover:bg-blue-600' onClick={() => unfollowUser(username)}>Unfollow</button> </> }
+      {userData.isThisUserMe ? ( null ) : 
+      <div> 
+      
+      {userData.isFollowingUser ? <button className='border font-semibold px-12 rounded-sm text-black bg-white' onClick={() => unfollowUser(username)}>Following</button> : <button className='border font-semibold px-4 rounded-sm text-white bg-blue-500 hover:bg-blue-600' onClick={() => followUser(username)}>Follow</button> }
+      
+      </div> }
       </div>
       {/* Line-2 Post, follower, following count */}
       <div className='flex gap-8 pb-4'>
