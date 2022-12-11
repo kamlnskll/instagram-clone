@@ -50,3 +50,23 @@ const fetchUser = await axios.get(`${baseURL}${userURL}/${userName}`)
 }}
 
 
+export const followUser = async (userName: string) => {
+
+try {
+await axios.post(`${baseURL}${userURL}/${userName}/follow`).then(res => console.log(res))
+} catch (error) {
+    console.log(error)
+}
+
+}
+
+export const unfollowUser = async (userName: string) => {
+
+    try {
+    await axios.post(`${baseURL}${userURL}/${userName}/unfollow`).then(res => console.log(res))
+    } catch (error) {
+        console.log(error)
+    }
+    
+    }
+
