@@ -19,7 +19,8 @@ comments: [{
 
 numberOfComments: {
     type: Number,
-    default: 0
+    default: 0,
+    min: 0
 },
 
 likes: [{type: ObjectId,
@@ -28,6 +29,7 @@ ref: "User"}],
 numberOfLikes: {
     type: Number,
     default: 0,
+    min: 0
 },
 
 postedBy: {type: ObjectId,

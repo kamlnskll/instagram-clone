@@ -35,12 +35,14 @@ required: true,
 
     followerCount: {
         type: Number,
-        default: 0
+        default: 0,
+        min: 0
     },
 
     followingCount: {
         type: Number,
-        default: 0
+        default: 0,
+        min: 0
     },
 
     posts: [{
@@ -50,7 +52,8 @@ required: true,
 
     postCount: {
         type: Number,
-        default: 0
+        default: 0,
+        min: 0
     },
 
     bio: {type: String},
