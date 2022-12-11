@@ -6,6 +6,7 @@ import { ShareIcon } from './icons/Share'
 import { BookmarkSelected, BookmarkUnselected } from './icons/Bookmark'
 import dayjs from 'dayjs'
 import CommentForm from './CommentForm'
+import { likePostToggle } from '../utils/axios/postAPIs'
 
 type Props = {
   isOnFeed: boolean,
@@ -28,7 +29,9 @@ isOnFeed ? (
       </div>
       <div className='flex justify-between mx-4 pt-4'>
       <div className='flex gap-3'>
+      <div onClick={() => likePostToggle(post._id)}>
       <FavoriteUnselected />
+      </div>
       <CommentIcon />
       <ShareIcon />
       </div>

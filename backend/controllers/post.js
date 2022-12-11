@@ -93,15 +93,17 @@ export const getPostById = async (req, res) => {
 
 export const likePostToggle = async (req, res) => {
 
-try{
 const post = await Post.findOne({_id: req.params.postid})
+const selectedPost = post._id
 
-if(post && !post.likes.includes(req.user)){
-await Post.findByIdAndUpdate(req.params.postid, { $push: { likes: req.user}, $inc: { numberOfLikes: 1 } })
+try{
 
-} if(post && post.likes.includes(req.user)) {
+if(!post.likes.includes(req.user)){
+await Post.findByIdAndUpdate(selectedPost, { $push: { likes: req.user}, $inc: { numberOfLikes: 1 } })
 
-await Post.findByIdAndUpdate(req.params.postid, { $pull: { likes: req.user}, $inc: { numberOfLikes: -1 } })
+} if(post.likes.includes(req.user)) {
+
+await Post.findByIdAndUpdate(selectedPost, { $pull: { likes: req.user}, $inc: { numberOfLikes: -1 } })
 
 } else{
     console.log('No post with that ID found')

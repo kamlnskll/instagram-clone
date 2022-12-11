@@ -48,6 +48,20 @@ return post
 
 }
 
+export const likePostToggle = async (postId: any) => {
+
+try {
+const likePost = await axios.post(`${baseURL}${postURL}/${postId}/togglelike`)
+return likePost
+
+} catch (err) {
+    console.log(err)
+}
+
+
+}
+
+
 // export const sendImgtoCloudinary = async (formData: any) => {
 
 // const data = { image: formData }
