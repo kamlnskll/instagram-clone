@@ -53,12 +53,25 @@ export const likePostToggle = async (postId: any) => {
 try {
 const likePost = await axios.post(`${baseURL}${postURL}/${postId}/togglelike`).then(res => console.log(res.data))
 
+
 } catch (err) {
     console.log(err)
 }
 
 
 }
+
+export const checkIfLikedByUser = async (postId: any) => {
+
+    try {
+    const checkLikes = await axios.get(`${baseURL}${postURL}/${postId}/checklikes`)
+    return checkLikes.data    
+    } catch (err) {
+        console.log(err)
+    }
+    
+    
+    }
 
 
 // export const sendImgtoCloudinary = async (formData: any) => {

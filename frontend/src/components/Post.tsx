@@ -6,7 +6,7 @@ import { ShareIcon } from './icons/Share'
 import { BookmarkSelected, BookmarkUnselected } from './icons/Bookmark'
 import dayjs from 'dayjs'
 import CommentForm from './CommentForm'
-import { likePostToggle } from '../utils/axios/postAPIs'
+import { checkIfLikedByUser, likePostToggle } from '../utils/axios/postAPIs'
 import { getProfileId } from '../utils/axios/profileAPIs'
 
 type Props = {
@@ -19,6 +19,11 @@ const Post = ({isOnFeed, post}: Props) => {
 
 const formattedDate = dayjs(post.createdAt).format(`MMMM D`)
 
+const [isLiked, setIsLiked] = useState(false)
+
+useEffect(() => {
+checkIfLikedByUser(post._id).then(res => setIsLiked(res))
+}, [])
 
 
 return (
@@ -34,7 +39,7 @@ isOnFeed ? (
       <div className='flex justify-between mx-4 pt-4'>
       <div className='flex gap-3'>
       <div onClick={() => likePostToggle(post._id)}>
-     <FavoriteUnselected />
+     { isLiked ? <FavoriteSelected /> : <FavoriteUnselected />}
       </div>
       <CommentIcon />
       <ShareIcon />
