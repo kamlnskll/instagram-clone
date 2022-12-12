@@ -68,7 +68,7 @@ export const editPost = async (req, res) => {
 export const getAllPosts = async (req, res) => {
 
     try{
-        const posts = await Post.find().populate('postedBy')
+        const posts = await Post.find().populate('postedBy').populate({path: 'likes', select: 'userName profilePic'})
         res.status(200).json(posts)
     } catch(err) { throw err }
 
