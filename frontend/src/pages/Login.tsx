@@ -25,7 +25,7 @@ const Login = () => {
 
 
   return (
-    <div className='w-2/5 mx-auto h-screen'>
+    <div className='w-1/3 mx-auto h-screen'>
       <div className='border my-8 pb-6 bg-white border-gray-300'>
       <h1 className='text-center text-3xl my-4 py-6'>Instaclone</h1>
       <form className='flex flex-col gap-4'>
