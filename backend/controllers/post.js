@@ -101,18 +101,29 @@ const isLikedByUser = post.likes.includes(req.user)
 try{
 
 if(!isLikedByUser){
-await Post.findByIdAndUpdate(selectedPost, { $push: { likes: req.user}, $inc: { numberOfLikes: 1 } })
+const post = await Post.findByIdAndUpdate(selectedPost, { $push: { likes: req.user}, $inc: { numberOfLikes: 1 } }, {new: true})
+return res.json(post.likes.includes(req.user))
 
 } if(isLikedByUser) {
 
-await Post.findByIdAndUpdate(selectedPost, { $pull: { likes: req.user}, $inc: { numberOfLikes: -1 } })
+const post = await Post.findByIdAndUpdate(selectedPost, { $pull: { likes: req.user}, $inc: { numberOfLikes: -1 } }, {new: true})
+return res.json(post.likes.includes(req.user))
 
 
-} else{
+} 
+else{
     console.log('No post with that ID found')
 } } catch (err) {
     console.log(err)
 }
+
+}
+
+export const checkIfLiked = async (req, res) => {
+
+const post = await Post.findOne({_id: req.params.postid})
+const checkIfLiked = post.likes.includes(req.user)
+return res.json(checkIfLiked)
 
 }
 
