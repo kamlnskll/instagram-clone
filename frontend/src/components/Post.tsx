@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FavoriteSelected, FavoriteUnselected } from './icons/Like'
 import { CommentIcon } from './icons/Comment'
 import { ShareIcon } from './icons/Share'
@@ -25,12 +25,62 @@ useEffect(() => {
 checkIfLikedByUser(post._id).then(res => setIsLiked(res))
 }, [])
 
+const navigate = useNavigate()
+
+
+const likeList = post.likes
+const likes = post.likes.map((liker: any) => {
+
+// switch (likeList.length) {
+
+//   case likeList.length == 0:
+//     <h1>Be the first to like this post!</h1>
+//     break
+  
+//   case likeList.length == 1:
+//     <span className='font-semibold cursor-pointer pl-1' onClick={() => {navigate(`/profile/${liker.userName}`)}}>{liker.userName}</span>
+//     break
+
+//   case likeList.length > 1 && likeList.length <= 3:
+//     <span className='font-semibold cursor-pointer pl-1' onClick={() => {navigate(`/profile/${liker.userName}`)}}>{liker.userName},</span>
+//     break
+
+//   case likeList.length >= 4:
+//     <span className='font-semibold cursor-pointer pl-1' onClick={() => {navigate(`/profile/${liker.userName}`)}}>{liker.userName}</span>
+//     break
+// }
+
+
+if(likeList.length === 0){
+  return (
+    <h1>Be the first to like this post!</h1>
+  )
+}
+
+else if(likeList.length === 1){
+  return (
+<span className='font-semibold cursor-pointer pl-1' onClick={() => {navigate(`/profile/${liker.userName}`)}}>{liker.userName}</span>)}
+
+
+else if(likeList.length < 4){
+  return (
+<span className='font-semibold cursor-pointer pl-1' onClick={() => {navigate(`/profile/${liker.userName}`)}}>{liker.userName}</span>)}
+
+else if (likeList.length >= 4 ){
+  return (
+<h1 className='font-semibold cursor-pointer' onClick={() => {navigate(`/profile/${liker.userName}`)}}>{liker.userName}</h1>
+)}
+
+}
+
+)
+
 
 return (
 isOnFeed ? (
     <div key={post._id} className='border rounded-xl'>
       <Link to={`/profile/${post.postedBy.userName}`} className='flex gap-3 my-auto py-3 border-b pl-4'>
-        <img className='w-10 h-10 rounded-full'src={post.postedBy.profilePic}/>
+        <img className='w-10 h-10 rounded-full' src={post.postedBy.profilePic}/>
         <h1 className='my-auto font-semibold'>{post.postedBy.userName}</h1>
       </Link>
       <div>
@@ -48,9 +98,8 @@ isOnFeed ? (
         <BookmarkUnselected />
       </div>
       </div>
-      <div className='flex ml-4 pt-4'>
-      <h1></h1>
-      <h2>Liked by 'insert names heres'</h2>
+      <div className='flex ml-4 pt-4'> 
+      <h1 className={likeList.length == 0 ? `hidden` : `flex`}>Liked by<span className='flex'>{likes}</span></h1>
       </div>
       <div className='ml-4 py-3'>
       <div className='flex gap-2'>
