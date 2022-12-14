@@ -18,23 +18,23 @@ await setImg(data)
 
   return (
     isOpen ? (
-    <div className={addCaption ? `absolute bg-white rounded-2xl h-1/2 w-1/2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2` : `absolute bg-white rounded-2xl h-1/2 w-1/2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}>
+    <div className={addCaption ? `absolute bg-white w-full rounded-2xl h-2/3 top-1/2 left-1/2 translate-x-full -translate-y-1/2 border` : `absolute bg-white rounded-2xl h-2/3 top-1/2 left-1/2 transform translate-x-full -translate-y-1/2 border`}>
     {addCaption ? <h1 className='font-bold text-center py-2 border-b'>Add a caption</h1> : <h1 className='font-bold text-center py-2 border-b'>Create a new post</h1> }
-    <div className='h-full flex'>
-    <div className='my-auto mx-auto'>
-    {addCaption ? <div className='border'>
+    <div className='h-full w-full flex px-4'>
+    <div className='my-auto w-full'>
+    {addCaption ? <div className=''>
     <textarea 
     placeholder='Add a caption here'
-    className='outline-none border'
+    className='outline-none w-full placeholder:text-center'
     onChange={(e) => setCaption(e.target.value)}
     /> 
-    <button onClick={() => {
+    <button className='bg-sky-600 text-center text-sm py-1 w-full rounded-sm text-white font-bold' onClick={() => {
       // console.log(caption, img)
       createNewPost(caption, img).then(res => console.log(res))
       
       }}>Upload</button>
     
-    </div> : <> <h1 className='text-xl tracking-wide'>Drag photo and videos here</h1>
+    </div> : <> <h1 className='text-xl tracking-wide text-center font-semibold'>Upload photo and videos here</h1>
     <Uploader imgData={imgData} setAddCaption={setAddCaption}/>
     
     </>}
