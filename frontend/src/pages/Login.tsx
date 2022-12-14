@@ -33,9 +33,9 @@ const Login = () => {
         <input placeholder="Username or email" className='bg-gray-50 mx-8 py-1 placeholder:text-xs focus:outline-1 focus:outline-gray-400 placeholder:text-gray-400 border rounded-sm p-2' type='text' name='userName' onChange={changeHandler} required/>
         <input placeholder="Password" className='bg-gray-50 mx-8 py-1 placeholder:text-xs focus:outline-1 focus:outline-gray-400 placeholder:text-gray-400 border rounded-sm p-2' type='password' name='password' onChange={changeHandler} required/>
        
-        <button className='bg-sky-500 text-center mx-8 text-sm py-1 rounded-sm text-white font-bold' type='button' onClick={() => loginUser(loginData.userName, loginData.password).then(() => {
-          dispatch({type: 'LOGIN', payload: token})
-          navigate('/')}).then(() => console.log('Logged in with token', {token})).catch(error => console.log(error))}>Log in</button>
+        <button className='bg-sky-500 text-center mx-8 text-sm py-1 rounded-sm text-white font-bold' type='button' onClick={() => {
+          loginUser(loginData.userName, loginData.password)
+          dispatch({type: 'LOGIN', payload: token})}}>Log in</button>
       </form>
 
       <h1 className='text-center mt-12 text-xs text-indigo-900'>Forgot password?</h1>

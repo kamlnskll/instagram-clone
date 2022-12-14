@@ -67,7 +67,7 @@ const { logout } = logoutUser()
     <div className='py-24'>
     {/* <button onClick={() => getSubscribedPosts().then((res) => {
   console.log("michael should be following all 3 peeps", res)})}>TEST BUTTON FOR SUBSCRIBED POSTS</button> */}
-<button onClick={() => logout()}>Logout User</button>
+<button type='button' onClick={() => {logout()}}>Logout User</button>
 </div>
     </div>
   </nav>

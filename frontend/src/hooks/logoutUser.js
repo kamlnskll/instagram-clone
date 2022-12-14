@@ -12,7 +12,6 @@ const logout = () => {
 
 localStorage.removeItem('token')
 dispatch ({type: 'LOGOUT'})
-navigate('/')
 
 }
 

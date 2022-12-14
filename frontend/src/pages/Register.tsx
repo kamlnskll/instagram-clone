@@ -41,7 +41,7 @@ const changeHandler = (e: any) => {
     <input type='text' className='bg-gray-50 mx-8 py-1 placeholder:text-xs focus:outline-1 focus:outline-gray-400 placeholder:text-gray-400 border rounded-sm p-2' placeholder='Full Name' name='fullName' onChange={changeHandler} required/>
     <input type='text' className='bg-gray-50 mx-8 py-1 placeholder:text-xs focus:outline-1 focus:outline-gray-400 placeholder:text-gray-400 border rounded-sm p-2' placeholder='Username' name='userName' onChange={changeHandler} required/>
     <input type='password' className='bg-gray-50 mx-8 py-1 placeholder:text-xs focus:outline-1 focus:outline-gray-400 placeholder:text-gray-400 border rounded-sm p-2' placeholder='Password' name='password' onChange={changeHandler} required/>
-    <button className='bg-sky-500 text-center mx-8 text-sm py-1 rounded-sm text-white font-bold' onClick={() => registerNewUser(registrationData.email, registrationData.fullName, registrationData.userName, registrationData.password).then(() => navigate('/')).catch(error => console.log(error))}>Sign Up</button>
+    <button type="button" className='bg-sky-500 text-center mx-8 text-sm py-1 rounded-sm text-white font-bold' onClick={() => registerNewUser(registrationData.email, registrationData.fullName, registrationData.userName, registrationData.password)}>Sign Up</button>
     </form>
     </div>    
     </div> 
