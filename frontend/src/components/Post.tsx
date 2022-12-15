@@ -111,7 +111,7 @@ isOnFeed ? (
       </Link>
       <h2>{post.caption}</h2>
       </div>
-      <CommentForm isOpen={commentIsOpen} />
+      <CommentForm postId={post._id} isOpen={commentIsOpen} />
       <h3 className='text-xs text-gray-500 mt-2'>{formattedDate}</h3>
       </div>
     </div>

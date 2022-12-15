@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const {ObjectId} = mongoose.SchemaTypes 
 
 const commentSchema = new mongoose.Schema({
-user: {
+postedBy: {
     type: ObjectId, ref: "User",
 },
 
@@ -12,3 +12,5 @@ comment: {
     required: true,
 }
 })
+
+export default mongoose.model("Comment", commentSchema)
