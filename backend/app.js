@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import userRoutes from './routes/user.js'
 import postRoutes from './routes/post.js'
 import profileRoutes from './routes/profile.js'
+import commentRoutes from './routes/comments.js'
 import { cloudinaryConfig } from './utils/cloudinary.js'
 
 
@@ -37,6 +38,7 @@ app.get('/', (req, res) => {
 app.use('/api/posts', postRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/profile', profileRoutes)
+app.use('/api/comments', commentRoutes)
 
 
   app.listen(process.env.PORT, (error) =>{

@@ -13,8 +13,7 @@ photo: {
 },
 
 comments: [{
-    type: String,
-    postedBy:{type: ObjectId, ref: "User"},
+    
 }],
 
 numberOfComments: {
