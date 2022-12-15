@@ -20,6 +20,7 @@ const Post = ({isOnFeed, post}: Props) => {
 const formattedDate = dayjs(post.createdAt).format(`MMMM D`)
 
 const [isLiked, setIsLiked] = useState(false)
+const [commentIsOpen, setCommentIsOpen] = useState(false)
 
 useEffect(() => {
 checkIfLikedByUser(post._id).then(res => setIsLiked(res))
@@ -91,7 +92,9 @@ isOnFeed ? (
       <div onClick={() => likePostToggle(post._id)}>
      { isLiked ? <FavoriteSelected /> : <FavoriteUnselected />}
       </div>
+      <div onClick={() => setCommentIsOpen(!commentIsOpen)}>
       <CommentIcon />
+      </div>
       <ShareIcon />
       </div>
       <div>
@@ -108,7 +111,7 @@ isOnFeed ? (
       </Link>
       <h2>{post.caption}</h2>
       </div>
-      <CommentForm />
+      <CommentForm isOpen={commentIsOpen} />
       <h3 className='text-xs text-gray-500 mt-2'>{formattedDate}</h3>
       </div>
     </div>
