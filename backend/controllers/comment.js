@@ -18,3 +18,19 @@ await res.status(200).json(saveComment)
 } catch (err){ console.log(err) }
 
 } 
+
+export const getComments = async (req, res) => {
+
+try {
+const comments = await Post.findById(req.params.postid).select('comments -_id')
+console.log(comments)
+res.status(200).json(comments)
+
+return comments
+}
+
+catch (err) {
+    console.log(err)
+}
+
+}
