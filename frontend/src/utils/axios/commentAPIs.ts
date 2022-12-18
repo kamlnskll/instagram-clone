@@ -19,5 +19,17 @@ return addComment
 
 } catch (err) {console.log(err)}
 
+}
+
+export const getPostComments = async (postid: any) => {
+
+try {
+const getComments = await axios.get(`${baseURL}${commentURL}/${postid}/getcomments`)
+return getComments.data
+
+}
+catch (err) {
+    console.log(err)
+}
 
 }

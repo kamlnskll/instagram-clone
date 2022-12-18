@@ -8,6 +8,7 @@ import dayjs from 'dayjs'
 import CommentForm from './CommentForm'
 import { checkIfLikedByUser, likePostToggle } from '../utils/axios/postAPIs'
 import { getProfileId } from '../utils/axios/profileAPIs'
+import Comments from './Comments'
 
 type Props = {
   isOnFeed: boolean,
@@ -112,6 +113,7 @@ isOnFeed ? (
       <h2>{post.caption}</h2>
       </div>
       <CommentForm postId={post._id} isOpen={commentIsOpen} />
+      <Comments postId={post._id} />
       <h3 className='text-xs text-gray-500 mt-2'>{formattedDate}</h3>
       </div>
     </div>
