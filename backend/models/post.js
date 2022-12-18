@@ -13,7 +13,7 @@ photo: {
 },
 
 comments: [{
-    
+    type: ObjectId, ref: "Comment", 
 }],
 
 numberOfComments: {
