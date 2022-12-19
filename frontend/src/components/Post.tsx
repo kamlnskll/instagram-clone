@@ -114,7 +114,7 @@ isOnFeed ? (
       </div>
       <CommentForm postId={post._id} isOpen={commentIsOpen} />
       <Comments postId={post._id} />
-      <h3 className='text-xs text-gray-500 mt-2'>{formattedDate}</h3>
+      <h2 className='text-xs text-gray-500 mt-2'>{formattedDate}</h2>
       </div>
     </div>
   ) : (
