@@ -9,6 +9,7 @@ import CommentForm from './CommentForm'
 import { checkIfLikedByUser, likePostToggle } from '../utils/axios/postAPIs'
 import { getProfileId } from '../utils/axios/profileAPIs'
 import Comments from './Comments'
+import EditPostModal from './EditPostModal'
 
 type Props = {
   isOnFeed: boolean,
@@ -22,9 +23,13 @@ const formattedDate = dayjs(post.createdAt).format(`MMMM D`)
 
 const [isLiked, setIsLiked] = useState(false)
 const [commentIsOpen, setCommentIsOpen] = useState(false)
+const [editModalIsOpen, setEditModalIsOpen] = useState(false)
 
 useEffect(() => {
-checkIfLikedByUser(post._id).then(res => setIsLiked(res))
+checkIfLikedByUser(post._id).then(res => {
+  setIsLiked(res)
+})
+
 }, [])
 
 const navigate = useNavigate()
@@ -32,25 +37,6 @@ const navigate = useNavigate()
 
 const likeList = post.likes
 const likes = post.likes.map((liker: any) => {
-
-// switch (likeList.length) {
-
-//   case likeList.length == 0:
-//     <h1>Be the first to like this post!</h1>
-//     break
-  
-//   case likeList.length == 1:
-//     <span className='font-semibold cursor-pointer pl-1' onClick={() => {navigate(`/profile/${liker.userName}`)}}>{liker.userName}</span>
-//     break
-
-//   case likeList.length > 1 && likeList.length <= 3:
-//     <span className='font-semibold cursor-pointer pl-1' onClick={() => {navigate(`/profile/${liker.userName}`)}}>{liker.userName},</span>
-//     break
-
-//   case likeList.length >= 4:
-//     <span className='font-semibold cursor-pointer pl-1' onClick={() => {navigate(`/profile/${liker.userName}`)}}>{liker.userName}</span>
-//     break
-// }
 
 
 if(likeList.length === 0){
@@ -80,11 +66,19 @@ else if (likeList.length >= 4 ){
 
 return (
 isOnFeed ? (
-    <div key={post._id} className='border rounded-xl'>
-      <Link to={`/profile/${post.postedBy.userName}`} className='flex gap-3 my-auto py-3 border-b pl-4'>
+    <div key={post._id} className='border rounded-xl relative'>
+      <div className='flex justify-between border-b '>
+      <div>
+      <Link to={`/profile/${post.postedBy.userName}`} className='flex gap-3 my-auto py-3 pl-4'>
         <img className='w-10 h-10 rounded-full' src={post.postedBy.profilePic}/>
         <h1 className='my-auto font-semibold'>{post.postedBy.userName}</h1>
       </Link>
+      </div>
+      <div className='my-2 mr-4'>
+        <h1 className='text-3xl font-semibold cursor-pointer' onClick={() => setEditModalIsOpen(!editModalIsOpen)}>...</h1>
+        <EditPostModal isOpen={editModalIsOpen} postId={post._id} postCaption={post.caption}/>
+      </div>
+      </div>
       <div>
       <img className='w-[468px] h-[468px] object-fill border-b' src={post.photo} />
       </div>
