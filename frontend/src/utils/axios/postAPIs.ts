@@ -73,3 +73,27 @@ export const checkIfLikedByUser = async (postId: any) => {
     
     }
 
+export const deletePost = async (postId: any) => {
+try{
+const deletePost = await axios.delete(`${baseURL}${postURL}/${postId}/deletepost`).then(res => console.log(res.data))
+return deletePost
+
+} catch(err){
+    console.log(err)
+}
+}
+
+export const editPost = async (postId: any, caption: string) => {
+
+try{
+const editPost = await axios.put(`${baseURL}${postURL}/${postId}/editpost`, {
+    caption: caption
+}).then(res => console.log(res))
+return editPost
+
+} catch (err) {
+    console.log(err)
+}
+
+}
+

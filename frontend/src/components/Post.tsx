@@ -76,7 +76,7 @@ isOnFeed ? (
       </div>
       <div className='my-2 mr-4'>
         <h1 className='text-3xl font-semibold cursor-pointer' onClick={() => setEditModalIsOpen(!editModalIsOpen)}>...</h1>
-        <EditPostModal isOpen={editModalIsOpen}/>
+        <EditPostModal isOpen={editModalIsOpen} postId={post._id} postCaption={post.caption}/>
       </div>
       </div>
       <div>

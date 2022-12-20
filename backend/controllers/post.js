@@ -46,8 +46,17 @@ export const uploadContentToCloudinary = (req, res) => {
 export const deletePost = async (req, res) => {
 
     try{
+        const postedBy = await Post.findById(req.params.postid).select('postedBy')
+        // console.log(postedBy.postedBy)
+        if(postedBy.postedBy == req.user){
         await Post.findByIdAndDelete(req.params.postid)
-        res.status(200).json('Post Deleted')
+        await User.findByIdAndUpdate(req.user, { $pull: {posts: req.params.postid}, $inc: {postCount: -1}})
+        res.status(200).json('Posted deleted')
+        }
+
+        else {
+        res.json('Cannot delete somebody elses post.')
+        }
     } catch (err) {
         throw err
     }
@@ -57,8 +66,15 @@ export const deletePost = async (req, res) => {
 // Edit post caption only, not photo/video
 export const editPostCaption = async (req, res) => {
 try {
+
+    const postedBy = await Post.findById(req.params.postid).select('postedBy')
+    if(postedBy.postedBy == req.user){
     const post = await Post.findByIdAndUpdate(req.params.postid, { $set: { caption: req.body.caption}}, {new: true})
     res.status(200).json(post)
+    }
+    else {
+        console.log('Cannot edit a post if it is not yours.')
+    }
 } catch (err) {
     console.log(err)
 }
