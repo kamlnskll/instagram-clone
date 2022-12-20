@@ -9,6 +9,7 @@ import CommentForm from './CommentForm'
 import { checkIfLikedByUser, likePostToggle } from '../utils/axios/postAPIs'
 import { getProfileId } from '../utils/axios/profileAPIs'
 import Comments from './Comments'
+import EditPostModal from './EditPostModal'
 
 type Props = {
   isOnFeed: boolean,
@@ -22,6 +23,7 @@ const formattedDate = dayjs(post.createdAt).format(`MMMM D`)
 
 const [isLiked, setIsLiked] = useState(false)
 const [commentIsOpen, setCommentIsOpen] = useState(false)
+const [editModalIsOpen, setEditModalIsOpen] = useState(false)
 
 useEffect(() => {
 checkIfLikedByUser(post._id).then(res => {
@@ -64,7 +66,7 @@ else if (likeList.length >= 4 ){
 
 return (
 isOnFeed ? (
-    <div key={post._id} className='border rounded-xl'>
+    <div key={post._id} className='border rounded-xl relative'>
       <div className='flex justify-between border-b '>
       <div>
       <Link to={`/profile/${post.postedBy.userName}`} className='flex gap-3 my-auto py-3 pl-4'>
@@ -73,7 +75,8 @@ isOnFeed ? (
       </Link>
       </div>
       <div className='my-2 mr-4'>
-        <h1 className='text-3xl font-semibold cursor-pointer'>...</h1>
+        <h1 className='text-3xl font-semibold cursor-pointer' onClick={() => setEditModalIsOpen(!editModalIsOpen)}>...</h1>
+        <EditPostModal isOpen={editModalIsOpen}/>
       </div>
       </div>
       <div>
