@@ -46,11 +46,7 @@ export const uploadContentToCloudinary = (req, res) => {
 export const deletePost = async (req, res) => {
 
     try{
-        await Post.deleteOne({
-            _id: req.params.id
-        }, {
-            new: true
-        })
+        await Post.findByIdAndDelete(req.params.postid)
         res.status(200).json('Post Deleted')
     } catch (err) {
         throw err
@@ -59,7 +55,13 @@ export const deletePost = async (req, res) => {
 }
 
 // Edit post caption only, not photo/video
-export const editPost = async (req, res) => {
+export const editPostCaption = async (req, res) => {
+try {
+    const post = await Post.findByIdAndUpdate(req.params.postid, { $set: { caption: req.body.caption}}, {new: true})
+    res.status(200).json(post)
+} catch (err) {
+    console.log(err)
+}
 
 
 }
