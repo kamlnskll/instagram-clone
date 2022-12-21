@@ -22,11 +22,16 @@ isThisUserMe: (false),
 isFollowingUser: (false)
 })
 
+const [followerList, setFollowerList] = useState(false)
+const [followingList, setFollowingList] = useState(false)
+
 
   useEffect(() => {
 getUserbyUsername(username).then((res) => {setUserData(res) 
   setPost(res.posts)
 }).catch((err) => console.log(err))}, [username])
+
+
 
 
   return (
@@ -55,8 +60,12 @@ getUserbyUsername(username).then((res) => {setUserData(res)
       {/* Line-2 Post, follower, following count */}
       <div className='flex gap-8 pb-4'>
         <h1><span className='font-semibold'>{userData.postCount} </span>posts</h1>
-        <h1><span className='font-semibold'>{userData.followerCount} </span>followers</h1>
-        <h1><span className='font-semibold'>{userData.followingCount} </span>following</h1>
+        <div className='relative' onClick={() => setFollowerList(!followerList)}><h1><span className='font-semibold'>{userData.followerCount} </span>followers</h1>
+        <div className={followerList ? `absolute bg-white` : `absolute invisible null`}>Follower List</div>
+        </div>
+        <div className='relative' onClick={() => setFollowingList(!followingList)}><h1><span className='font-semibold'>{userData.followingCount} </span>following</h1>
+        <div className={followingList ? `absolute bg-white` : `absolute invisible null`}>Following List</div>
+        </div>
       </div>
       <div className='pb-2'>
         <h1 className='font-semibold'>{userData.fullName}</h1>
