@@ -7,8 +7,9 @@ const EditProfile = () => {
     <Navbar />
     <div className='mx-auto h-screen'>
     <div className='bg-white h-1/2 my-12 flex'>
-    <div>Menu part</div>
-    <div>Actual body of menu items</div>
+    <div className='border-r px-12'>Menu part</div>
+    <div className='px-24'>
+    Actual body of menu items</div>
     </div>
     </div>
     </div>
