@@ -43,7 +43,8 @@ getUserbyUsername(username).then((res) => {setUserData(res)
 
   return (
     <div className='flex'>
-    <div className='h-screen pl-16'>
+      <Navbar />
+    <div className='h-screen pl-12'>
       <div className='flex justify-center gap-[128px] py-16'>
       {/* Img div */}
       <div>

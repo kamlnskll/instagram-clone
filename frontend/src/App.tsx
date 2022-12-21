@@ -15,7 +15,6 @@ const { user } = useUserContext()
     <>
     <BrowserRouter>
     <div className="flex">
-    <Navbar />
     <Routes>
       <Route path='/' element={user ? <HomeFeed /> : <Navigate to="/login" />}/>
       <Route path='/register' element={!user ? <Register /> : <Navigate to="/" />}/>
