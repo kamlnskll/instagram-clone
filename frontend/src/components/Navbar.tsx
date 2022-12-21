@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { CreateUnselected } from './icons/Create'
 import { ExploreUnselected } from './icons/Explore'
-import { HomeSelected } from './icons/Home'
+import { HomeSelected, HomeUnselected } from './icons/Home'
 import { MessageUnselected } from './icons/Messages'
 import { NotificationsUnselected } from './icons/Notifications'
 import { SearchBtnIcon } from './icons/Search'
 import { getSubscribedPosts } from '../utils/axios/postAPIs'
 import { logoutUser } from '../hooks/logoutUser'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { getProfileUsernameandProfilePic } from '../utils/axios/profileAPIs'
 import NewPostModal from './NewPostModal'
 
@@ -54,7 +54,7 @@ const { logout } = logoutUser()
     </Link>
     <ul className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full'>
     <NotificationsUnselected />
-    <h1 className='invisible sm:visible'>Notifications</h1>
+    <h1 className='invisible sm:visible' onClick={() => console.log()}>Notifications</h1>
     </ul>
     <ul className='pl-2 flex gap-4 py-2 my-2 cursor-pointer hover:bg-gray-50 hover:rounded-full' onClick={() => setIsOpen(!isOpen)}>
     <CreateUnselected />

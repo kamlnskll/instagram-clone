@@ -14,6 +14,8 @@ const { user } = useUserContext()
   return (
     <>
     <BrowserRouter>
+    <div className="flex">
+    <Navbar />
     <Routes>
       <Route path='/' element={user ? <HomeFeed /> : <Navigate to="/login" />}/>
       <Route path='/register' element={!user ? <Register /> : <Navigate to="/" />}/>
@@ -21,7 +23,6 @@ const { user } = useUserContext()
       <Route path='/profile/:username' element={<Profile />}/>
       <Route path='*' element={<Navigate to="/" />}/>
     </Routes>
-    <div>
     </div>
     </BrowserRouter>
     </>
