@@ -4,6 +4,7 @@ import { getUserbyUsername, followUser, unfollowUser} from '../utils/axios/userA
 import Post from '../components/Post'
 import { SettingsIcon } from '../components/icons/Settings'
 import { Link } from 'react-router-dom'
+import Navbar from '../components/Navbar'
 
 const Profile = () => {
 
@@ -41,7 +42,9 @@ getUserbyUsername(username).then((res) => {setUserData(res)
 
 
   return (
-    <div className='h-screen'>
+    <div className='flex'>
+      <Navbar />
+    <div className='h-screen pl-16'>
       <div className='flex justify-center gap-[128px] py-16'>
       {/* Img div */}
       <div>
@@ -52,7 +55,7 @@ getUserbyUsername(username).then((res) => {setUserData(res)
       {/* Line-1 Username, Edit btns */}
       <div className='flex gap-8 pb-6'>
       <h1 className='text-2xl'>{userData.userName}</h1>
-      {userData.isThisUserMe ? ( <><button className='border font-semibold px-2 rounded-sm'>Edit profile</button>
+      {userData.isThisUserMe ? ( <><button className='bg-gray-200 hover:bg-gray-300 font-semibold px-2 rounded-sm'>Edit profile</button>
       <div>
       <SettingsIcon />
       </div>  </> ) : null }
@@ -71,8 +74,8 @@ getUserbyUsername(username).then((res) => {setUserData(res)
           ) : followers.map((follower: any) => { 
             return (
             <>
-          <div className='flex justify-between'>
-          <Link key={follower._id} to={`/profile/${follower.userName}`} className='py-1 hover:bg-gray-50'>
+          <div className='flex justify-between hover:bg-gray-50'>
+          <Link key={follower._id} to={`/profile/${follower.userName}`} className='py-1'>
           <div className='flex gap-4'>
           <div className='my-auto'>
           <img className='w-[24px] h-[24px] rounded-full ml-4' src={follower.profilePic}/>
@@ -100,8 +103,8 @@ getUserbyUsername(username).then((res) => {setUserData(res)
           ) : following.map((following: any) => { 
             return (
             <>
-          <div className='flex justify-between'>
-          <Link key={following._id} to={`/profile/${following.userName}`} className='py-1 hover:bg-gray-50'>
+          <div className='flex justify-between hover:bg-gray-50'>
+          <Link key={following._id} to={`/profile/${following.userName}`} className='py-1 '>
           <div className='flex gap-4'>
           <div className='my-auto'>
           <img className='w-[24px] h-[24px] rounded-full ml-4' src={following.profilePic}/>
@@ -131,14 +134,13 @@ getUserbyUsername(username).then((res) => {setUserData(res)
       
       </div>
       </div>
-
-      
     <div className='grid grid-cols-3'>
       {post.map((posts) => {
         return (
           <Post isOnFeed={false} post={posts}/>
           
       )} )}
+    </div>
     </div>
     </div>
   )
