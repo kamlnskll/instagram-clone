@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getUserbyUsername, followUser, unfollowUser} from '../utils/axios/userAPIs'
 import Post from '../components/Post'
 import { SettingsIcon } from '../components/icons/Settings'
+import { Link } from 'react-router-dom'
 
 const Profile = () => {
 
@@ -22,11 +23,21 @@ isThisUserMe: (false),
 isFollowingUser: (false)
 })
 
+const [followerList, setFollowerList] = useState(false)
+const [followingList, setFollowingList] = useState(false)
+const [followers, setFollowers] = useState([])
+const [following, setFollowing] = useState([])
+const [loading, setLoading] = useState(true)
 
   useEffect(() => {
 getUserbyUsername(username).then((res) => {setUserData(res) 
   setPost(res.posts)
+  setFollowers(res.followers)
+  setFollowing(res.following)
+  setLoading(false)
 }).catch((err) => console.log(err))}, [username])
+
+
 
 
   return (
@@ -47,16 +58,71 @@ getUserbyUsername(username).then((res) => {setUserData(res)
       </div>  </> ) : null }
       {userData.isThisUserMe ? ( null ) : 
       <div> 
-      
       {userData.isFollowingUser ? <button className='border font-semibold px-12 rounded-sm text-black bg-white' onClick={() => unfollowUser(username)}>Following</button> : <button className='border font-semibold px-4 rounded-sm text-white bg-blue-500 hover:bg-blue-600' onClick={() => followUser(username)}>Follow</button> }
-      
       </div> }
       </div>
       {/* Line-2 Post, follower, following count */}
       <div className='flex gap-8 pb-4'>
         <h1><span className='font-semibold'>{userData.postCount} </span>posts</h1>
-        <h1><span className='font-semibold'>{userData.followerCount} </span>followers</h1>
-        <h1><span className='font-semibold'>{userData.followingCount} </span>following</h1>
+        <div className='relative cursor-pointer' onClick={() => {setFollowerList(!followerList); setFollowingList(false)}}><h1><span className='font-semibold'>{userData.followerCount} </span>followers</h1>
+        <div className={followerList ? `absolute bg-white rounded-lg border border-gray-100 w-64` : `absolute invisible null`}>
+          {loading ? (
+            <p>Loading...</p>
+          ) : followers.map((follower: any) => { 
+            return (
+            <>
+          <div className='flex justify-between'>
+          <Link key={follower._id} to={`/profile/${follower.userName}`} className='py-1 hover:bg-gray-50'>
+          <div className='flex gap-4'>
+          <div className='my-auto'>
+          <img className='w-[24px] h-[24px] rounded-full ml-4' src={follower.profilePic}/>
+          </div>
+          <div>
+          <h1 className='text-sm font-semibold'>{follower.userName}</h1>
+          <h1 className='text-xs text-gray-400'>{follower.fullName}</h1>
+          </div>
+          </div>
+          </Link>
+          {/* {userData.isThisUserMe ? ( null ) : 
+      <div className='my-auto mx-auto'> 
+      {userData.isFollowingUser ? <button className='border font-semibold rounded-sm text-xs px-2 py-1 text-black bg-white' onClick={() => unfollowUser(username)}>Following</button> : <button className='border font-semibold px-2 py-1 text-xs rounded-sm text-white bg-blue-500 hover:bg-blue-600' onClick={() => followUser(username)}>Follow</button> }
+      </div> } */}
+          </div>
+          </>
+          )
+          })}
+        </div>
+        </div>
+        <div className='relative cursor-pointer' onClick={() => {setFollowingList(!followingList); setFollowerList(false)}}><h1><span className='font-semibold'>{userData.followingCount} </span>following</h1>
+        <div className={followingList ? `absolute bg-white rounded-lg border border-gray-100 w-64` : `absolute invisible null`}>
+        {loading ? (
+            <p>Loading...</p>
+          ) : following.map((following: any) => { 
+            return (
+            <>
+          <div className='flex justify-between'>
+          <Link key={following._id} to={`/profile/${following.userName}`} className='py-1 hover:bg-gray-50'>
+          <div className='flex gap-4'>
+          <div className='my-auto'>
+          <img className='w-[24px] h-[24px] rounded-full ml-4' src={following.profilePic}/>
+          </div>
+          <div>
+          <h1 className='font-semibold text-sm'>{following.userName}</h1>
+          <h1 className='text-xs text-gray-400'>{following.fullName}</h1>
+          </div>
+          </div>
+          </Link>
+          {/* {userData.isThisUserMe ? ( null ) : 
+      <div className='my-auto mx-auto'> 
+      {userData.isFollowingUser ? <button className='border font-semibold rounded-sm text-xs px-2 py-1 text-black bg-white' onClick={() => unfollowUser(username)}>Following</button> : <button className='border font-semibold px-2 py-1 text-xs rounded-sm text-white bg-blue-500 hover:bg-blue-600' onClick={() => followUser(username)}>Follow</button> }
+      </div> } */}
+          </div>
+          </>
+          )
+          })}
+          
+          </div>
+        </div>
       </div>
       <div className='pb-2'>
         <h1 className='font-semibold'>{userData.fullName}</h1>
