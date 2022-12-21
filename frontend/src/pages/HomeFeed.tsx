@@ -15,7 +15,7 @@ console.log(res)})
 
 
   return (
-      <>
+      <div className='flex'>
       <Navbar />
       <div className='mx-auto'>
       {post.map((eachPost) => {
@@ -25,7 +25,7 @@ console.log(res)})
       </div>
       )})}
       </div>
-     </>
+      </div>
   )
 
 }
