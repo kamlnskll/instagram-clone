@@ -13,3 +13,18 @@ export const getUsernameofLoggedInUser = asyncHandler (async (req, res) => {
     } catch(err) { throw err }
 
 })
+
+export const getProfileDataForEditPage = asyncHandler(async (req, res) => {
+
+try {
+const findUserData = await User.findById(req.user).select('profilePic userName fullName bio website')
+res.status(200).json(findUserData)
+
+
+
+} catch (err) {
+    throw err
+}
+
+
+})
