@@ -9,7 +9,7 @@ isOpen: boolean,
 const NewPostModal = ({isOpen}: Props) => {
 
 const [img, setImg] = useState('')
-const [addCaption, setAddCaption] = useState(true)
+const [addCaption, setAddCaption] = useState(false)
 const [caption, setCaption] = useState('')
 
 const imgData = async (data: string) => {

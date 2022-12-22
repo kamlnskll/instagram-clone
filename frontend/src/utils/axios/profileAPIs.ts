@@ -28,3 +28,36 @@ export const getProfileId = async () => {
         } catch (error) {console.log(error)}
         
         }
+
+export const getProfileDataToEdit = async () => {
+
+    try {
+        const data = await axios.get(`${baseURL}${profileURL}/editprofiledata`)
+        return data.data
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+export const submitProfileDataEdit = async (fullName: string, userName: string, website: string, bio: string) => {
+
+    try {
+
+        const data = {
+            fullName: fullName,
+            userName: userName,
+            website: website,
+            bio: bio
+        }
+
+        const updatedData = await axios.put(`${baseURL}${profileURL}/editprofiledata`, data)
+        return updatedData.data
+
+    } catch (error) {
+        console.log(error)
+
+    }
+
+
+}

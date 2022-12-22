@@ -149,7 +149,7 @@ const selectedUserId = user._id
 
 export const getUserbyUsername = asyncHandler(async (req, res, next) => {
 
-const user = await User.findOne({userName: req.params.username}).select('_id userName fullName profilePic followers following followerCount followingCount postCount bio posts').populate("posts following followers")
+const user = await User.findOne({userName: req.params.username}).select('_id website userName fullName profilePic followers following followerCount followingCount postCount bio posts').populate("posts following followers")
 const userFollowerIds = await User.findOne({userName: req.params.username}).select('followers')
 
    if(user){
@@ -164,6 +164,7 @@ const userFollowerIds = await User.findOne({userName: req.params.username}).sele
             followerCount: user.followerCount,
             postCount: user.postCount,
             bio: user.bio,
+            website: user.website,
             posts: user.posts,
             isThisUserMe: await req.user == user._id,
             isFollowingUser: userFollowerIds.followers.includes(req.user)

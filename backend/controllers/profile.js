@@ -13,3 +13,38 @@ export const getUsernameofLoggedInUser = asyncHandler (async (req, res) => {
     } catch(err) { throw err }
 
 })
+
+export const getProfileDataForEditPage = asyncHandler(async (req, res) => {
+
+try {
+const findUserData = await User.findById(req.user).select('profilePic userName fullName bio website')
+res.status(200).json(findUserData)
+
+} catch (err) {
+    throw err
+}
+
+
+})
+
+export const postUpdatedProfileDataforEditPage = asyncHandler (async (req, res) => {
+
+try {
+
+const { fullName, userName, bio, website } = req.body
+
+const updatedData = {
+    fullName,
+    userName,
+    bio,
+    website
+}
+
+const updatedUserData = await User.findByIdAndUpdate(req.user, updatedData, {new: true})
+return res.json(updatedUserData)
+
+} catch (err){
+    throw err
+}
+
+})

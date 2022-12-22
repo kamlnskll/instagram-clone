@@ -19,6 +19,7 @@ followers: '',
 followingCount: 0,
 followerCount: 0,
 bio: '',
+website: '',
 postCount: '',
 isThisUserMe: (false),
 isFollowingUser: (false)
@@ -131,7 +132,8 @@ getUserbyUsername(username).then((res) => {setUserData(res)
       </div>
       <div className='pb-2'>
         <h1 className='font-semibold'>{userData.fullName}</h1>
-        <h2>{userData.bio}</h2>
+        <h2 className='text-sm'>{userData.bio}</h2>
+        <a href={`${userData.website}`} target='_blank' className='text-sm text-blue-900 cursor-pointer'>{userData.website}</a>
       </div>
       
       </div>

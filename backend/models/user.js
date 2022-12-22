@@ -19,6 +19,15 @@ required: true,
 
     },
 
+    bio: {
+        type: String,
+        maxLength: 150,
+    },
+
+    website: {
+        type: String,
+    },
+
     password: {
         type: String,
         required: true,
