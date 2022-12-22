@@ -66,7 +66,7 @@ else if (likeList.length >= 4 ){
 
 return (
 isOnFeed ? (
-    <div key={post._id} className='border rounded-xl relative'>
+    <div key={post._id} className='border rounded-xl relative w-2/3 mx-auto'>
       <div className='flex justify-between border-b '>
       <div>
       <Link to={`/profile/${post.postedBy.userName}`} className='flex gap-3 my-auto py-3 pl-4'>
@@ -79,9 +79,7 @@ isOnFeed ? (
         <EditPostModal isOpen={editModalIsOpen} postId={post._id} postCaption={post.caption}/>
       </div>
       </div>
-      <div>
-      <img className='w-[468px] h-[468px] object-fill border-b' src={post.photo} />
-      </div>
+      <img className='w-full h-[512px] object-fill border-b' src={post.photo} />
       <div className='flex justify-between mx-4 pt-4'>
       <div className='flex gap-3'>
       <div onClick={() => likePostToggle(post._id)}>
