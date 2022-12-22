@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
-import { getProfileDataToEdit } from '../utils/axios/profileAPIs'
+import { getProfileDataToEdit, submitProfileDataEdit } from '../utils/axios/profileAPIs'
 
 const EditProfile = () => {
 
@@ -32,6 +32,7 @@ const handleChange = (event: any) => {
     setCharacterCount(value.length)
   }
 }
+
 
   return (
     <div className='flex'>
@@ -71,9 +72,8 @@ const handleChange = (event: any) => {
       <h2 className='text-xs text-gray-500'>{characterCount}/150</h2>
       </div>
     </div>
-    <button className='absolute bottom-16 right-1/2 font-semibold text-white py-1 hover:bg-blue-500 bg-blue-400 rounded-md px-4'>Submit</button>
+    <button type='button' className='absolute bottom-16 right-1/2 font-semibold text-white py-1 hover:bg-blue-500 bg-blue-400 rounded-md px-4' onClick={() => submitProfileDataEdit(profileData.fullName, profileData.userName, profileData.website, profileData.bio).then(res => console.log(res)).catch(err => console.log(err))}>Submit</button>
     </> : null}
-    
     </div>
     </div>
     </div>
