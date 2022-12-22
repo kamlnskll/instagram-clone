@@ -9,7 +9,7 @@ isOpen: boolean,
 const NewPostModal = ({isOpen}: Props) => {
 
 const [img, setImg] = useState('')
-const [addCaption, setAddCaption] = useState(false)
+const [addCaption, setAddCaption] = useState(true)
 const [caption, setCaption] = useState('')
 
 const imgData = async (data: string) => {
@@ -18,10 +18,11 @@ await setImg(data)
 
   return (
     isOpen ? (
-    <div className={addCaption ? `absolute bg-white w-full rounded-2xl h-2/3 top-1/2 left-1/2 translate-x-full -translate-y-1/2 border` : `absolute bg-white rounded-2xl h-2/3 top-1/2 left-1/2 transform translate-x-full -translate-y-1/2 border`}>
+   
+    <div className='absolute bg-white rounded-2xl h-2/3 top-1/2 left-1/2 transform translate-x-full -translate-y-1/2 border'>
     {addCaption ? <h1 className='font-bold text-center py-2 border-b'>Add a caption</h1> : <h1 className='font-bold text-center py-2 border-b'>Create a new post</h1> }
-    <div className='h-full w-full flex px-4'>
-    <div className='my-auto w-full'>
+    <div className='h-full flex px-4'>
+    <div className='my-auto w-full w-96'>
     {addCaption ? <div className=''>
     <textarea 
     placeholder='Add a caption here'
@@ -43,7 +44,6 @@ await setImg(data)
     </div></div>
   
     </div>
-    
     ) : null
   )
 }
