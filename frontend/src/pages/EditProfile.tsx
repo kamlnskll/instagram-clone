@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 
 const EditProfile = () => {
+
+const [menuTab, setMenuTab] = useState('')
+
   return (
     <div className='flex'>
     <Navbar />
