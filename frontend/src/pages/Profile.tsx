@@ -29,6 +29,8 @@ const [followingList, setFollowingList] = useState(false)
 const [followers, setFollowers] = useState([])
 const [following, setFollowing] = useState([])
 const [loading, setLoading] = useState(true)
+const navigate = useNavigate()
+
 
   useEffect(() => {
 getUserbyUsername(username).then((res) => {setUserData(res) 
@@ -55,7 +57,7 @@ getUserbyUsername(username).then((res) => {setUserData(res)
       {/* Line-1 Username, Edit btns */}
       <div className='flex gap-8 pb-6'>
       <h1 className='text-2xl'>{userData.userName}</h1>
-      {userData.isThisUserMe ? ( <><button className='bg-gray-200 hover:bg-gray-300 font-semibold px-2 rounded-sm'>Edit profile</button>
+      {userData.isThisUserMe ? ( <><button className='bg-gray-200 hover:bg-gray-300 font-semibold px-2 rounded-sm' onClick={() => navigate('/accounts/edit')}>Edit profile</button>
       <div>
       <SettingsIcon />
       </div>  </> ) : null }
