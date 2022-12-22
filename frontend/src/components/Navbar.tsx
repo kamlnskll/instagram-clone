@@ -32,7 +32,7 @@ const { logout } = logoutUser()
 
   return (
 <>
-    <nav className='h-screen relative z-50 bg-white border-r border-gray-300 w-1/6 sticky top-0'>
+    <nav className='h-screen relative z-50 bg-white border-r border-gray-300 sticky top-0'>
     <h1 className='text-4xl px-12 mt-4'>Instaclone</h1>
     <NewPostModal isOpen={isOpen} />
     <div className='text-xl px-4 mx-auto h-full pt-8'>
