@@ -10,6 +10,7 @@ import { logoutUser } from '../hooks/logoutUser'
 import { Link, useParams } from 'react-router-dom'
 import { getProfileUsernameandProfilePic } from '../utils/axios/profileAPIs'
 import NewPostModal from './NewPostModal'
+import Search from './Search'
 
 
 
@@ -71,6 +72,9 @@ const { logout } = logoutUser()
 </div>
     </div>
   </nav>
+  <div className='relative'>
+  <Search />
+  </div>
   </>
   )
 }
