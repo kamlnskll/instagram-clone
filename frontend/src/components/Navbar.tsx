@@ -27,6 +27,7 @@ useEffect(() => {
 }, [])
 
 const [isOpen, setIsOpen] = useState(false)
+const [openSearch, setOpenSearch] = useState(false)
 
 const { logout } = logoutUser()
 
@@ -41,7 +42,7 @@ const { logout } = logoutUser()
     <HomeSelected />
     <h1 className='invisible sm:visible'>Home</h1>
     </Link>
-    <ul className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full'>
+    <ul className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full hover:cursor-pointer' onClick={() => setOpenSearch(!openSearch)}>
     <SearchBtnIcon />    
     <h1 className='invisible sm:visible'>Search</h1>
     </ul>
@@ -73,7 +74,7 @@ const { logout } = logoutUser()
     </div>
   </nav>
   <div className='relative'>
-  <Search />
+  <Search isOpen={openSearch} />
   </div>
   </>
   )
