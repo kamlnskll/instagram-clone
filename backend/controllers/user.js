@@ -176,3 +176,24 @@ const userFollowerIds = await User.findOne({userName: req.params.username}).sele
 }
 
 )
+
+export const searchUsers = asyncHandler(async (req, res) => {
+
+try{
+    const searchTerm = req.body.searchTerm
+
+// Search collection for a match
+
+if(req.body.searchTerm !== '' || null){
+    const searchResults = await User.find({
+        $or: [
+            { fullName: { $regex: searchTerm, $options: 'i'}},
+            { userName: { $regex: searchTerm, $options: 'i'}}
+        ]}).exec()
+        
+        res.send(searchResults)}
+} catch(err){
+    console.log(err)
+}
+
+})

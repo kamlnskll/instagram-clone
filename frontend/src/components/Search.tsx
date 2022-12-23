@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router'
+import SearchInput from './SearchInput'
 
 type Props = {
 
@@ -6,7 +8,18 @@ isOpen: boolean,
 
 }
 
+
 const Search = ({isOpen}: Props) => {
+
+const [search, setSearch] = useState([])
+const [loading, setLoading] = useState(true)
+const navigate = useNavigate()
+
+const handleSearch = (searchResults: any) => {
+setSearch(searchResults)
+setLoading(false)
+}
+
   return (
     <div className='absolute sticky top-0 z-50'>
 { isOpen ?  (
@@ -16,10 +29,32 @@ const Search = ({isOpen}: Props) => {
         Search
         </h1>
         <div className='px-6 pt-3 border-b relative'>
-        <input placeholder='Search' className='w-full py-2 mb-6 pl-4 outline-none bg-gray-200 border-none rounded-lg' />
-        <h1 className='absolute top-6 right-8 text-white bg-gray-300 border rounded-full px-1 text-xs cursor-pointer'>X</h1>
+        <SearchInput onSearch={handleSearch} />
+        {/* <button onClick={() => console.log(search)}>Test for search results </button> */}
+        {/* <input placeholder='Search' className='w-full py-2 mb-6 pl-4 outline-none bg-gray-200 border-none rounded-lg' /> */}
         </div>
     </div>
+    {loading ? (
+      null
+
+    ) : search.map((user: any) => (
+        <>
+        <div key={user._id} className='flex hover:bg-gray-100 cursor-pointer py-4' onClick={() => navigate(`/profile/${user.userName}`)}>
+        <div className='pl-8 flex'>
+        <img src={user.profilePic} className='w-[32px] h-[32px] rounded-full my-auto'/>
+        <div className='pl-6'>
+        <h1 className='font-semibold'>{user.userName}</h1>
+        <h1 className='text-xs'>{user.fullName}</h1>
+        </div>
+        <div className='text-xs font-semibold pl-12 gap-1 my-auto grid-rows-2 grid'>
+            <h1>{user.followerCount} followers</h1>
+            <h1>{user.followingCount} following</h1>
+        </div>
+        </div>
+        </div>
+       
+        </>
+    ))}
     </div>
 ) : (null)}
 
