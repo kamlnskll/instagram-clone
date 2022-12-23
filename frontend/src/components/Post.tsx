@@ -117,7 +117,7 @@ isOnFeed ? (
 <h1 className='hover:visible text-white font-bold mx-auto my-auto'>{post.numberOfLikes}</h1>
 <h1 className='hover:visible text-white font-bold mx-auto my-auto'>{post.numberOfComments}</h1>
 </div> */}
-<div key={post._id} className='my-6 cursor-pointer hover:opacity-25'>
+<div key={post._id} className='my-6 cursor-pointer hover:opacity-25' onClick={() => navigate(`/post/${post._id}`)}>
 <img className='h-[256px] w-[256px]' src={post.photo}/>
 </div>
 </div>

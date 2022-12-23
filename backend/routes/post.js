@@ -8,7 +8,7 @@ const router = express.Router()
 router.use(cors())
 
 router.get('/getallposts', getAllPosts)
-router.get('/:postid', getPostById)
+router.get('/post/:postid', getPostById)
 router.post('/upload', multerUploads.single('image'), uploadContentToCloudinary) 
 
 

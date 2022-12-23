@@ -97,3 +97,16 @@ return editPost
 
 }
 
+export const getPostById = async (postId: any) => {
+
+try {
+const getPost = await axios.get(`${baseURL}${postURL}/post/${postId}`)
+return getPost.data
+} catch(err) {
+
+    console.log(err)
+
+}
+
+}
+

@@ -105,6 +105,8 @@ export const getSubscribedPosts = async (req, res) => {
 
 export const getPostById = async (req, res) => {
 
+const post = await Post.findById(req.params.postid).populate('postedBy').populate({path: 'likes', select: 'userName profilePic'})
+return res.status(200).json(post)
 
 
 }

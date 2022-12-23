@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import { useUserContext } from "./hooks/useUserContext.js";
 import EditProfile from "./pages/EditProfile";
+import SinglePost from "./pages/SinglePost";
 
 function App(): any {
 
@@ -21,6 +22,7 @@ const { user } = useUserContext()
       <Route path='/profile/:username' element={<Profile />}/>
       <Route path='/accounts/edit' element={<EditProfile />} />
       <Route path='*' element={<Navigate to="/" />}/>
+      <Route path='/post/:postid' element={<SinglePost />} />
     </Routes>
     </BrowserRouter>
     </>
