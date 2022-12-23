@@ -81,3 +81,14 @@ export const unfollowUser = async (userName: any) => {
     
     }
 
+export const searchUsers = async(searchTerm: string) => {
+        try {
+          const response = await axios.post(`${baseURL}${userURL}/search`, { searchTerm });
+          const results = response.data;
+          // Update the component state with the search results
+        return results
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
