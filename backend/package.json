@@ -9,7 +9,9 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.2",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "socket.io": "^4.5.4",
+    "ws": "^8.11.0"
   },
   "type": "module"
 }
