@@ -13,7 +13,15 @@ const socket = io('http://localhost:8001')
       <Navbar />
       <div className='w-full'>
       <div className='bg-white border w-3/4 mx-auto h-5/6 my-16 rounded-md'>
-        <h1 className=''>CHAT CONTAINER</h1>
+      <div className='grid grid-cols-3'>
+      <div className='col-span-1 bg-blue-200'>
+        <h1>List of people you are messaging...</h1>
+      </div>
+      <div className='col-span-2 bg-red-200'>
+<ChatContainer />      
+      </div>
+      </div>
+        {/* <h1 className=''>CHAT CONTAINER</h1> */}
     </div>
       </div>
       
