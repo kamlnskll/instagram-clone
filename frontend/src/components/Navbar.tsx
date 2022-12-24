@@ -50,7 +50,7 @@ const { logout } = logoutUser()
     <ExploreUnselected />
     <h1 className='invisible sm:visible'>Explore</h1>
     </Link>
-    <Link to={''} className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full'>
+    <Link to={'/messages'} className='pl-2 flex gap-4 py-2 my-2 hover:bg-gray-50 hover:rounded-full'>
     <MessageUnselected />
     <h1 className='invisible sm:visible'>Messages</h1>
     </Link>

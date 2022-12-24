@@ -8,7 +8,7 @@ import postRoutes from './routes/post.js'
 import profileRoutes from './routes/profile.js'
 import commentRoutes from './routes/comments.js'
 import { cloudinaryConfig } from './utils/cloudinary.js'
-import socketio from 'socket.io'
+// import io from 'socket.io'
 
 const app = express()
 dotenv.config()
@@ -30,14 +30,14 @@ mongoose.connection.on('Disconnected', () => {
     console.log('Disconnected from MongoDB cluster')
 })
 
-// Socket IO Stuff
+// // Socket IO Stuff
 
-const io = socketio(app)
+// const io = socketio(app)
 
-io.on('connection', (socket) => {
-console.log('A user has connected')
+// io.on('connection', (socket) => {
+// console.log('A user has connected')
 
-})
+// })
 
 
 app.get('/', (req, res) => {
