@@ -1,9 +1,11 @@
 import React from 'react'
 import ChatContainer from '../components/ChatContainer'
 import Navbar from '../components/Navbar'
+import {io } from 'socket.io-client'
 
 
 const Messages = () => {
+const socket = io('http://localhost:8000')
 
 
   return (
@@ -16,7 +18,7 @@ const Messages = () => {
         <h1>List of people you are messaging...</h1>
       </div>
       <div className='col-span-2 bg-red-200'>
-<ChatContainer />      
+<ChatContainer socket={socket}/>      
       </div>
       </div>
         {/* <h1 className=''>CHAT CONTAINER</h1> */}

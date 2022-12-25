@@ -8,7 +8,7 @@ import postRoutes from './routes/post.js'
 import profileRoutes from './routes/profile.js'
 import commentRoutes from './routes/comments.js'
 import { cloudinaryConfig } from './utils/cloudinary.js'
-import * as socketIO from 'socket.io'
+import { Server } from 'socket.io'
 import http from 'http'
 
 
@@ -19,7 +19,13 @@ app.use(cors())
 const server = http.createServer(app)
 app.use(bodyParser.json({limit: '5mb'}))
 app.use('*', cloudinaryConfig)
-export const io = socketIO(server)
+
+export const io = new Server(server, {
+
+    cors: {
+        origin: "http://localhost:3000"
+    } 
+})
 
 
 const connectToMongoCluster = async () => {
@@ -37,14 +43,15 @@ mongoose.connection.on('Disconnected', () => {
 
 // // Socket IO Stuff
 
-// const io = socketio(app)
-
 io.on('connection', (socket) => {
-console.log('A user has connected')
+console.log(`A user has connected to ${socket.id}`)
 
-socket.on('Send message', (message) => {
-   
+socket.on('send_message', (message) => {
+   socket.broadcast.emit("receive_message", (message))
+})
 
+socket.on('receive_message', (data) => {
+    console.log(data)
 })
 
 socket.on('disconnect', () => {
@@ -65,8 +72,8 @@ app.use('/api/user', userRoutes)
 app.use('/api/profile', profileRoutes)
 app.use('/api/comments', commentRoutes)
 
-
-  app.listen(process.env.PORT, (error) =>{
+// If whole server breaks change this from server.listen back to app.listen
+  server.listen(process.env.PORT, (error) =>{
     if(!error){
         connectToMongoCluster()
         console.log(`Server is Successfully Running on ${process.env.PORT}`)}
