@@ -8,13 +8,18 @@ import postRoutes from './routes/post.js'
 import profileRoutes from './routes/profile.js'
 import commentRoutes from './routes/comments.js'
 import { cloudinaryConfig } from './utils/cloudinary.js'
-// import io from 'socket.io'
+import * as socketIO from 'socket.io'
+import http from 'http'
+
+
 
 const app = express()
 dotenv.config()
 app.use(cors())
+const server = http.createServer(app)
 app.use(bodyParser.json({limit: '5mb'}))
 app.use('*', cloudinaryConfig)
+export const io = socketIO(server)
 
 
 const connectToMongoCluster = async () => {
@@ -34,10 +39,20 @@ mongoose.connection.on('Disconnected', () => {
 
 // const io = socketio(app)
 
-// io.on('connection', (socket) => {
-// console.log('A user has connected')
+io.on('connection', (socket) => {
+console.log('A user has connected')
 
-// })
+socket.on('Send message', (message) => {
+   
+
+})
+
+socket.on('disconnect', () => {
+    console.log('User disconnected')
+})
+
+
+})
 
 
 app.get('/', (req, res) => {
