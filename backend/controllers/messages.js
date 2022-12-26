@@ -1,5 +1,5 @@
 import Message from "../models/messages.js";
-import io from '../app'
+import {io} from '../app.js'
 
 export const sendMessage = async (req, res) => {
 
@@ -19,12 +19,12 @@ console.log(err)
 export const getMessages = async (req, res) => {
 
 try{
-const message = Message.findById(req.params.id)
-res.send(message)
+const messages = await Message.find({
+    conversationId: req.params.conversationId
+})
+res.status(200).json(messages)
 } catch (err) {
-
-    console.log(err)
+res.status(500).json(err)
 }
-
 
 }

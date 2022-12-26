@@ -4,9 +4,9 @@ const {ObjectId} = mongoose.SchemaTypes
 
 const conversationSchema = new mongoose.Schema({
 
-members: {
-type: Array,
-},
+members: [{
+    type: ObjectId, ref: 'User'
+}],
 
 }, {timestamps: true})
 
