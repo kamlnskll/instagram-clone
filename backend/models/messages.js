@@ -8,8 +8,8 @@ sender: {
 type: ObjectId, ref: "User", required: true
 },
 
-receiver: {
-type: ObjectId, ref: "User", required: true
+conversationId: {
+type: ObjectId, ref: "Conversations", required: true
 },
 
 message: {

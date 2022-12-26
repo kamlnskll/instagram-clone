@@ -1,17 +1,12 @@
-import Message from "../models/messages";
+import Message from "../models/messages.js";
 import io from '../app'
 
 export const sendMessage = async (req, res) => {
 
-const message = new Message({
-sender: req.user,
-receiver: req.body.receiver,
-message: req.body.message
-})
-
+const message = new Message(req.body)
 try{
 const savedMessage = await message.save()
-io.emit('Receive Message', savedMessage)
+io.emit('receive_message', savedMessage)
 res.send(savedMessage)
 
 } catch(err) {

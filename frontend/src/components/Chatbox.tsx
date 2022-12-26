@@ -1,8 +1,14 @@
 import React from 'react'
 
-const Chatbox = () => {
+type Props = {
+chat: any
+}
+
+const Chatbox = ({chat}: Props) => {
   return (
-    <div>Chatbox</div>
+    <div className='bg-blue-400 w-1/4' key={chat}>
+      <h1 className='text-right font-semibold'>{chat.message}</h1>
+    </div>
   )
 }
 
