@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import io from 'socket.io-client'
+import Chatbox from './Chatbox'
+import { getMessages } from '../utils/axios/messageAPIs'
 
 type Props = {
   socket: any,
+  conversationId: string
 }
 
-const ChatContainer = ({socket}: Props) => {
+const ChatContainer = ({socket, conversationId}: Props) => {
 
+
+
+const [chat, setChat] = useState([])
 const [message, setMessage] = useState('')
+const [loading, setLoading] = useState(true)
 
 const sendMessage = () => {
 socket.emit('send_message', {message: message})
@@ -15,18 +22,31 @@ setMessage('')
 }
 
 useEffect(() => {
+  if(conversationId !== '' ){
+    getMessages(conversationId).then(res => {
+      console.log(res)
+      setChat(res)
+      setLoading(false)
+    })
+  }
 socket.on("receive_message", (data: any) => {
-alert(data.message)
+  // @ts-ignore
+setChat([...chat, data])
+console.log(data)
 })
 }, [socket])
 
   return (
     <div className='border h-full'>
-    <h1 className=''>Chat Container
-
+      {loading ? (
+        <h1>Loading...</h1>
+      ) : chat.map((chat) => {
+        return (
+          <Chatbox chat={chat} isOwnUser={true}/>
+        )
+      })}
       <input placeholder='Message...' className='border rounded-full py-2 pl-6 outline-none text-sm w-5/6' value={message} onChange={(e) => setMessage(e.target.value)}/>
       <button onClick={sendMessage}>Send Message</button>
-    </h1>
     </div>
   )
 }

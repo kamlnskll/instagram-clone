@@ -1,17 +1,12 @@
-import Message from "../models/messages";
-import io from '../app'
+import Message from "../models/messages.js";
+import {io} from '../app.js'
 
 export const sendMessage = async (req, res) => {
 
-const message = new Message({
-sender: req.user,
-receiver: req.body.receiver,
-message: req.body.message
-})
-
+const message = new Message(req.body)
 try{
 const savedMessage = await message.save()
-io.emit('Receive Message', savedMessage)
+io.emit('receive_message', savedMessage)
 res.send(savedMessage)
 
 } catch(err) {
@@ -24,12 +19,12 @@ console.log(err)
 export const getMessages = async (req, res) => {
 
 try{
-const message = Message.findById(req.params.id)
-res.send(message)
+const messages = await Message.find({
+    conversationId: req.params.conversationId
+})
+res.status(200).json(messages)
 } catch (err) {
-
-    console.log(err)
+res.status(500).json(err)
 }
-
 
 }

@@ -7,6 +7,8 @@ import userRoutes from './routes/user.js'
 import postRoutes from './routes/post.js'
 import profileRoutes from './routes/profile.js'
 import commentRoutes from './routes/comments.js'
+import conversationRoutes from './routes/conversations.js'
+import messageRoutes from './routes/messages.js'
 import { cloudinaryConfig } from './utils/cloudinary.js'
 import { Server } from 'socket.io'
 import http from 'http'
@@ -71,6 +73,8 @@ app.use('/api/posts', postRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/profile', profileRoutes)
 app.use('/api/comments', commentRoutes)
+app.use('/api/conversations', conversationRoutes)
+app.use('/api/messages', messageRoutes)
 
 // If whole server breaks change this from server.listen back to app.listen
   server.listen(process.env.PORT, (error) =>{
