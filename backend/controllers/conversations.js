@@ -22,7 +22,7 @@ export const getConversations = async(req, res) => {
 try {
     const conversations = await Conversation.find({
         members: { $in: [req.user]}
-    })
+    }).populate('members')
 
     res.status(200).json(conversations)
 } catch(err){
