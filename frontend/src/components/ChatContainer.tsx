@@ -42,7 +42,7 @@ console.log(data)
         <h1>Loading...</h1>
       ) : chat.map((chat) => {
         return (
-          <Chatbox chat={chat}/>
+          <Chatbox chat={chat} isOwnUser={true}/>
         )
       })}
       <input placeholder='Message...' className='border rounded-full py-2 pl-6 outline-none text-sm w-5/6' value={message} onChange={(e) => setMessage(e.target.value)}/>
