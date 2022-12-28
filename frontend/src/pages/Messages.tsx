@@ -38,22 +38,22 @@ setUserId(decoded.id)
       <Navbar />
       <div className='w-full'>
       <div className='bg-white border w-3/4 mx-auto h-5/6 my-16 rounded-md'>
-      <div className='grid grid-cols-3 h-full'>
-      <div className='col-span-1 bg-white'>
+      <div className='grid grid-cols-5 h-full'>
+      <div className='col-span-2 bg-white pt-5 border-r'>
         {loading ? (
           <h1>
             Loading
           </h1>
         ) : conversations.map((convo: any) => {
           return(
-            <div key={convo._id} className='flex border hover:bg-gray-100' onClick={() => setConversationId(convo._id)}>
-              <img className='w-[24px] h-[24px]' src={convo.members[0].profilePic}/>
-              <h1>{convo.members[0].userName}</h1>
+            <div key={convo._id} className='flex hover:bg-gray-50 cursor-pointer px-4' onClick={() => setConversationId(convo._id)}>
+              <img className='w-[40px] h-[40px] rounded-full my-2' src={convo.members[0].profilePic}/>
+              <h1 className='pl-2 my-2'>{convo.members[0].userName}</h1>
             </div>
           )
         })}
       </div>
-      <div className='col-span-2 bg-red-200'>
+      <div className='col-span-3'>
 <ChatContainer socket={socket} conversationId={conversationId} userId={userId}/>      
       </div>
       </div>
