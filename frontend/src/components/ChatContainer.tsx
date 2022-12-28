@@ -38,17 +38,24 @@ console.log(data)
 }, [socket])
 
   return (
-    <div className='border h-full'>
-      <button onClick={() => console.log(userId)}>Test user Id</button>
+    <div className='h-full grid grid-rows-7'>
+    <div className='row-span-6'>
       {loading ? (
-        <h1>Loading...</h1>
+        <h1></h1>
       ) : chat.map((chat) => {
         return (
           <Chatbox chat={chat} userId={userId}/>
         )
       })}
-      <input placeholder='Message...' className='border rounded-full py-2 pl-6 outline-none text-sm w-5/6' value={message} onChange={(e) => setMessage(e.target.value)}/>
-      <button onClick={sendMessage}>Send Message</button>
+      
+    </div>
+
+      <div className={conversationId !== '' ? `flex relative row-span-1` : `hidden`}>
+      <input placeholder='Message...' className='border rounded-full pl-6 mx-auto outline-none text-sm w-5/6 h-2/3 my-auto' value={message} onChange={(e) => setMessage(e.target.value)}/>
+      <button className={message == '' ? `hover:bg-blue-500 bg-blue-400 px-2 py-1 absolute right-14 top-6 text-xs rounded-xl text-white font-semibold` : `hidden`} onClick={sendMessage}>Send</button>
+      </div>
+      
+    
     </div>
   )
 }
