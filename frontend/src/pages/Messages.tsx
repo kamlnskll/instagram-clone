@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar'
 import {io } from 'socket.io-client'
 import { userContext } from '../context/auth'
 import { getConversations } from '../utils/axios/messageAPIs'
-
+import jwtDecode from 'jwt-decode'
 
 const Messages = () => {
 const socket = io('http://localhost:8000')
@@ -12,12 +12,24 @@ const { user } = useContext(userContext)
 const [conversations, setConversations] = useState([])
 const [conversationId, setConversationId] = useState('')
 const [loading, setLoading] = useState(true)
+const [userId, setUserId] = useState(null)
+
+
+// console.log('decodedId', decoded.id)  
 
 useEffect(() => {
+
 getConversations().then(res => {
   setConversations(res)
   setLoading(false)
 })
+
+if(user){
+const decoded: any = jwtDecode(user)
+setUserId(decoded.id)
+}
+// console.log('userId from context', userId)
+
 
 }, []) 
 
@@ -42,7 +54,7 @@ getConversations().then(res => {
         })}
       </div>
       <div className='col-span-2 bg-red-200'>
-<ChatContainer socket={socket} conversationId={conversationId}/>      
+<ChatContainer socket={socket} conversationId={conversationId} userId={userId}/>      
       </div>
       </div>
         {/* <h1 className=''>CHAT CONTAINER</h1> */}

@@ -5,10 +5,11 @@ import { getMessages } from '../utils/axios/messageAPIs'
 
 type Props = {
   socket: any,
-  conversationId: string
+  conversationId: string,
+  userId: any
 }
 
-const ChatContainer = ({socket, conversationId}: Props) => {
+const ChatContainer = ({socket, conversationId, userId}: Props) => {
 
 
 
@@ -38,11 +39,12 @@ console.log(data)
 
   return (
     <div className='border h-full'>
+      <button onClick={() => console.log(userId)}>Test user Id</button>
       {loading ? (
         <h1>Loading...</h1>
       ) : chat.map((chat) => {
         return (
-          <Chatbox chat={chat} isOwnUser={true}/>
+          <Chatbox chat={chat} userId={userId}/>
         )
       })}
       <input placeholder='Message...' className='border rounded-full py-2 pl-6 outline-none text-sm w-5/6' value={message} onChange={(e) => setMessage(e.target.value)}/>

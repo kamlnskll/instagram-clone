@@ -2,17 +2,19 @@ import React from 'react'
 
 type Props = {
 chat: any,
-isOwnUser: boolean
+userId: any
 }
 
-const Chatbox = ({chat, isOwnUser}: Props) => {
+const Chatbox = ({chat, userId}: Props) => {
+const isOwnUser = chat.sender == userId
+
   return (
-    <div className='py-2 px-2 border'>
+    <div className='py-2 px-2'>
     {isOwnUser ? ( 
-      <div className='bg-red-400 text-right' key={chat}>
+      <div className='bg-blue-400 text-right' key={chat}>
     <h1 className='font-semibold'>{chat.message}</h1>
   </div> ) : (
-    <div className='bg-blue-400 text-left' key={chat}>
+    <div className='bg-red-400 text-left' key={chat}>
     <h1 className='font-semibold'>{chat.message}</h1>
   </div>
   )  
