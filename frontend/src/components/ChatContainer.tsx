@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import io from 'socket.io-client'
 import Chatbox from './Chatbox'
-import { getMessages } from '../utils/axios/messageAPIs'
+import { createMessage, getMessages } from '../utils/axios/messageAPIs'
 
 type Props = {
   socket: any,
@@ -11,13 +11,13 @@ type Props = {
 
 const ChatContainer = ({socket, conversationId, userId}: Props) => {
 
-
-
 const [chat, setChat] = useState([])
 const [message, setMessage] = useState('')
 const [loading, setLoading] = useState(true)
 
-const sendMessage = () => {
+const sendMessage = (e: any) => {
+e.preventDefault()
+createMessage(userId, conversationId, message).then(res => console.log(res))
 socket.emit('send_message', {message: message})
 setMessage('')
 }

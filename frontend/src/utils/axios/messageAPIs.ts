@@ -28,3 +28,22 @@ export const getMessages = async (conversationId: any) => {
         console.log(err)
     }
 }
+
+export const createMessage = async (sender: any, conversationId: any, message: string) => {
+
+    const messageData = {
+        sender: sender,
+        conversationId: conversationId,
+        message: message
+    }
+
+    try{
+   const message = await axios.post(`${baseURL}${messageURL}/sendmessage`, messageData)
+   return message
+
+} catch(err){
+console.log(err)
+}
+
+}
+
