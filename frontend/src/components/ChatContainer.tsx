@@ -15,9 +15,10 @@ const [chat, setChat] = useState([])
 const [message, setMessage] = useState('')
 const [loading, setLoading] = useState(true)
 
-const sendMessage = (e: any) => {
+const sendMessage = async (e: any) => {
 e.preventDefault()
-createMessage(userId, conversationId, message).then(res => console.log(res))
+// @ts-ignore
+await createMessage(userId, conversationId, message).then((res: any) => setChat([...chat, res.data]))
 socket.emit('send_message', {message: message})
 setMessage('')
 }
@@ -39,7 +40,7 @@ console.log(data)
 
   return (
     <div className='h-full grid grid-rows-7'>
-    <div className='row-span-6'>
+    <div className='row-span-6 overflow-y-scroll'>
       {loading ? (
         <h1></h1>
       ) : chat.map((chat) => {

@@ -6,7 +6,7 @@ userId: any
 }
 
 const Chatbox = ({chat, userId}: Props) => {
-const isOwnUser = chat.sender._id == userId
+const isOwnUser = true
 
   return (
     <div className='py-2 px-2'>
