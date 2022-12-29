@@ -52,7 +52,7 @@ console.log(data)
 
       <div className={conversationId !== '' ? `flex relative row-span-1` : `hidden`}>
       <input placeholder='Message...' className='border rounded-full pl-6 mx-auto outline-none text-sm w-5/6 h-2/3 my-auto' value={message} onChange={(e) => setMessage(e.target.value)}/>
-      <button className={message == '' ? `hover:bg-blue-500 bg-blue-400 px-2 py-1 absolute right-14 top-6 text-xs rounded-xl text-white font-semibold` : `hidden`} onClick={sendMessage}>Send</button>
+      <button className={message !== '' ? `hover:bg-blue-500 bg-blue-400 px-2 py-1 absolute right-14 top-6 text-xs rounded-xl text-white font-semibold` : `hidden`} onClick={sendMessage}>Send</button>
       </div>
       
     
