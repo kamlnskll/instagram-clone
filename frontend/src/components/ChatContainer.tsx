@@ -17,10 +17,14 @@ const [loading, setLoading] = useState(true)
 
 const sendMessage = async (e: any) => {
 e.preventDefault()
-// @ts-ignore
-await createMessage(userId, conversationId, message).then((res: any) => setChat([...chat, res.data]))
-socket.emit('send_message', {message: message})
-setMessage('')
+await createMessage(userId, conversationId, message).then((res: any) => 
+{
+  socket.emit('send_message', {message: message})
+    // @ts-ignore
+  setChat([...chat, res.data])
+  setMessage('')
+
+})
 }
 
 useEffect(() => {
