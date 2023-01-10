@@ -66,7 +66,7 @@ else if (likeList.length >= 4 ){
 
 return (
 isOnFeed ? (
-    <div key={post._id} className='border rounded-xl relative w-2/3 mx-auto'>
+    <div key={post._id} className='border rounded-xl relative w-[512px] mx-auto'>
       <div className='flex justify-between border-b '>
       <div>
       <Link to={`/profile/${post.postedBy.userName}`} className='flex gap-3 my-auto py-3 pl-4'>
