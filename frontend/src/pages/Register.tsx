@@ -31,7 +31,7 @@ const changeHandler = (e: any) => {
 // }
 
   return (
-    <div className='mx-auto w-1/3 h-screen'>
+    <div className='mx-auto w-[396px] h-screen'>
     <div className='border my-8 pb-6 bg-white border-gray-300'>
     <h1 className='text-center text-3xl my-4 py-6'>Instaclone</h1>
     <h2 className='my-4 pb-8 mx-8 text-center font-bold text-gray-400 text-lg'>Sign up to see photos and videos from your friends.</h2>
