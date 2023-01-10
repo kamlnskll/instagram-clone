@@ -48,11 +48,17 @@ After cloning the repo and project is open you need to start the backend and fro
 ### Starting the backend
 
 `cd backend`
+
+then
+
 `nodemon app.js`
 
 ### Starting the frontend
 
 `cd frontend`
+
+then
+
 `npm start`
 
 That's it, your project should be running! If your token expires, you may need to clear localhost cache and refresh the page to see changes reflected
