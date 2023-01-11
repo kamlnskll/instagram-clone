@@ -1,3 +1,4 @@
+import jwtDecode from 'jwt-decode'
 import React, {useEffect, useState} from 'react'
 import Navbar from '../components/Navbar'
 import NewPostModal from '../components/NewPostModal'
@@ -6,6 +7,19 @@ import { getAllPosts } from '../utils/axios/postAPIs'
 
 const HomeFeed = () => {
 const [post, setPost] = useState([])
+
+const checkIfValidToken = async () => {
+  const userToken: any = localStorage.getItem('token')
+  const decodedToken = await jwtDecode(userToken)
+  console.log(decodedToken)
+  // @ts-ignore
+  if(decodedToken !== null && decodedToken.iat < decodedToken.exp){
+    localStorage.removeItem('token')
+  } else {
+    return
+  }
+}
+
 
 useEffect(() => {
 getAllPosts().then((res) => {setPost(res)

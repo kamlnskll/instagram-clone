@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Register from "./pages/Register";
 import {Routes, Route, BrowserRouter, Navigate} from 'react-router-dom'
 import HomeFeed from "./pages/HomeFeed";
@@ -8,10 +8,20 @@ import { useUserContext } from "./hooks/useUserContext.js";
 import EditProfile from "./pages/EditProfile";
 import SinglePost from "./pages/SinglePost";
 import Messages from "./pages/Messages";
+import jwtDecode from "jwt-decode";
 
 function App(): any {
 
 const { user } = useUserContext()
+// const decodedToken = jwtDecode(user)  
+
+
+const checkUserToken = () => {
+
+}
+
+
+
 
   return (
     <>
