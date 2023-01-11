@@ -16,7 +16,7 @@ const checkIfValidToken = async () => {
   if(decodedToken !== null && decodedToken.iat < decodedToken.exp){
     localStorage.removeItem('token')
   } else {
-    return
+    
   }
 }
 
