@@ -5,6 +5,7 @@ import {io } from 'socket.io-client'
 import { userContext } from '../context/auth'
 import { getConversations } from '../utils/axios/messageAPIs'
 import jwtDecode from 'jwt-decode'
+import { checkIfValidToken } from '../utils/verifyToken'
 
 const Messages = () => {
 const socket = io('http://localhost:8000')
@@ -19,6 +20,7 @@ const [userId, setUserId] = useState(null)
 
 useEffect(() => {
 
+checkIfValidToken()
 getConversations().then(res => {
   setConversations(res)
   setLoading(false)
