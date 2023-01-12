@@ -8,22 +8,24 @@ import { getAllPosts } from '../utils/axios/postAPIs'
 const HomeFeed = () => {
 const [post, setPost] = useState([])
 
-const checkIfValidToken = async () => {
+const checkIfValidToken = () => {
   const userToken: any = localStorage.getItem('token')
-  const decodedToken = await jwtDecode(userToken)
-  console.log(decodedToken)
+  const { exp }: any = jwtDecode(userToken)
   // @ts-ignore
-  if(decodedToken !== null && decodedToken.iat < decodedToken.exp){
+  if(exp && userToken && Date.now() >= exp * 1000){
     localStorage.removeItem('token')
+    window.location.reload()
   } else {
-    
+    return
   }
 }
 
 
 useEffect(() => {
+checkIfValidToken()
 getAllPosts().then((res) => {setPost(res)
 console.log(res)})
+console.log(Date.now())
 // console.log(res)})
 }, [])
 
