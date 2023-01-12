@@ -13,8 +13,6 @@ useEffect(() => {
 checkIfValidToken()
 getAllPosts().then((res) => {setPost(res)
 console.log(res)})
-console.log(Date.now())
-// console.log(res)})
 }, [])
 
 
