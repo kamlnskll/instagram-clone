@@ -18,6 +18,12 @@ const [userId, setUserId] = useState(null)
 
 // console.log('decodedId', decoded.id)  
 
+const joinRoom = (conversation: any) => {
+  if(conversationId !== ''){
+    socket.emit("join_room", conversation)
+  }
+}
+
 useEffect(() => {
 
 checkIfValidToken()
@@ -47,7 +53,11 @@ setUserId(decoded.id)
           </h1>
         ) : conversations.map((convo: any) => {
           return(
-            <div key={convo._id} className='flex hover:bg-gray-50 cursor-pointer px-4' onClick={() => setConversationId(convo._id)}>
+            // @ts-ignore
+            <div key={convo._id} className='flex hover:bg-gray-50 cursor-pointer px-4' onClick={() => {
+              joinRoom(convo._id)
+              setConversationId(convo._id)
+              }}>
               <img className='w-[40px] h-[40px] rounded-full my-2' src={convo.members[0].profilePic}/>
               <h1 className='pl-2 my-2'>{convo.members[0].userName}</h1>
             </div>

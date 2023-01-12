@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import io from 'socket.io-client'
+import { useEffect, useState } from 'react'
+
 import Chatbox from './Chatbox'
 import { createMessage, getMessages } from '../utils/axios/messageAPIs'
 
@@ -15,45 +15,53 @@ const [chat, setChat] = useState([])
 const [message, setMessage] = useState('')
 const [loading, setLoading] = useState(true)
 
-const sendMessage = async (e: any) => {
-e.preventDefault()
+const sendMessage = async () => {
 
-await createMessage(userId, conversationId, message).then((res: any) => {
-    // @ts-ignore
-  setChat([...chat, res.data])
-  setMessage('')
-})
+// e.preventDefault()
+if (message !== ''){
 
-socket.emit('send_message', {message: message})
-
+const messageData = {
+room: conversationId,
+sender: userId,
+message: message,
+time: new Date(Date.now()).getHours() + ':' + new Date(Date.now()).getMinutes(),
 }
+
+await socket.emit('send_message', messageData)
+// @ts-ignore
+setChat((oldChat) => [...oldChat, messageData])
+console.log(messageData)
+setMessage('')
+
+await createMessage(userId, conversationId, message)
+
+}}
 
 useEffect(() => {
 
   if(conversationId !== '' ){
     getMessages(conversationId).then(res => {
-      // console.log(res)
       setChat(res)
       setLoading(false)
-      // console.log('socket', socket.connected)
     })
   }
 
-
-}, [socket])
+}, [conversationId])
 
 useEffect(() => {
+socket.on("receive_message", async (data: any) => {
 // @ts-ignore
-socket.on("receive_message", (data: any) => setChat([...chat, data])
-)
-}, [socket, chat])
+setChat((oldChat) => [...oldChat, data])
+})
+
+}, [socket])
 
   return (
     <div className='h-full grid grid-rows-7'>
     <div className='row-span-6 overflow-y-scroll'>
       {loading ? (
         <h1></h1>
-      ) : chat.map((chat) => {
+      ) : chat.map((chat: any) => {
         return (
           <Chatbox chat={chat} userId={userId}/>
         )

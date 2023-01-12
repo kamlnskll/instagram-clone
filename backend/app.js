@@ -43,21 +43,25 @@ mongoose.connection.on('Disconnected', () => {
     console.log('Disconnected from MongoDB cluster')
 })
 
-// // Socket IO Stuff
+// Socket IO Stuff
 
 io.on('connection', (socket) => {
 console.log(`User with ID: ${socket.id} connected`)
 
+socket.on("join_room", (data) => {
+    socket.join(data)
+    console.log(`User with ID: ${socket.id} joined room: ${data}`)
+})
+
 socket.on('send_message', (data) => {
-   socket.emit("receive_message", (data))
+   socket.to(data.room).emit("receive_message", data)
 })
 
 socket.on('disconnect', () => {
-    console.log('User disconnected')
+    console.log(`User with ID: ${socket.id} disconnected`)
 })
 
 })
-
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
