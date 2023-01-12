@@ -46,20 +46,15 @@ mongoose.connection.on('Disconnected', () => {
 // // Socket IO Stuff
 
 io.on('connection', (socket) => {
-console.log(`A user has connected to ${socket.id}`)
+console.log(`User with ID: ${socket.id} connected`)
 
-socket.on('send_message', (message) => {
-   socket.broadcast.emit("receive_message", (message))
-})
-
-socket.on('receive_message', (data) => {
-    console.log(data)
+socket.on('send_message', (data) => {
+   socket.emit("receive_message", (data))
 })
 
 socket.on('disconnect', () => {
     console.log('User disconnected')
 })
-
 
 })
 

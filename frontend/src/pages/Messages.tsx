@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import ChatContainer from '../components/ChatContainer'
 import Navbar from '../components/Navbar'
-import {io } from 'socket.io-client'
+import { io } from 'socket.io-client'
 import { userContext } from '../context/auth'
 import { getConversations } from '../utils/axios/messageAPIs'
 import jwtDecode from 'jwt-decode'
@@ -30,7 +30,6 @@ if(user){
 const decoded: any = jwtDecode(user)
 setUserId(decoded.id)
 }
-// console.log('userId from context', userId)
 
 
 }, []) 
