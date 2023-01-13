@@ -14,14 +14,18 @@ const [conversations, setConversations] = useState([])
 const [conversationId, setConversationId] = useState('')
 const [loading, setLoading] = useState(true)
 const [userId, setUserId] = useState(null)
+const [currentRoom, setCurrentRoom] = useState('')
 
 
 // console.log('decodedId', decoded.id)  
 
 const joinRoom = (conversation: any) => {
-  if(conversationId !== ''){
+  
+  if(conversation !== '' && currentRoom !== conversation){
     socket.emit("join_room", conversation)
-  }
+    setCurrentRoom(conversation)
+  } 
+  
 }
 
 useEffect(() => {
@@ -41,12 +45,6 @@ setUserId(decoded.id)
 }, [])
 
 useEffect(() => {
-
-
-// @ts-ignore
-// if(socket.rooms.hasOwnProperty(conversationId)){
-//   socket.emit("leave_room", (conversationId))
-// }
 console.log(socket)
 }, [conversationId])
 
