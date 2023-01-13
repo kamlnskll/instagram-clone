@@ -33,11 +33,12 @@ await socket.emit('send_message', messageData, () => {
   // @ts-ignore
   setChat((oldChat) => [...oldChat, messageData])
   console.log(messageData)
-  setMessage('')
 
 })
 
 await createMessage(userId, conversationId, message)
+
+setMessage('')
 
 }}
 
@@ -49,6 +50,8 @@ useEffect(() => {
       setLoading(false)
     })
   }
+
+setMessage('')
 
 }, [conversationId])
 

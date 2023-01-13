@@ -49,9 +49,20 @@ io.on('connection', (socket) => {
 console.log(`User with ID: ${socket.id} connected`)
 
 socket.on("join_room", (data) => {
-    socket.join(data)
-    console.log(`User with ID: ${socket.id} joined room: ${data}`)
+    if(!socket.rooms.hasOwnProperty(data)){
+        socket.join(data)
+        console.log(`User with ID: ${socket.id} joined room: ${data}`)
+    } else {
+        console.log(`User with ID: ${socket.id} is already in room: ${data}`)
+    }
+    
 })
+
+socket.on("leave_room", (data) => {
+socket.leave(data)
+console.log(`User with ID: ${socket.id} left room ${data}`)
+})
+
 
 socket.once('send_message', (data) => {
    socket.to(data.room).emit("receive_message", data)
@@ -60,6 +71,7 @@ socket.once('send_message', (data) => {
 socket.on('disconnect', () => {
     console.log(`User with ID: ${socket.id} disconnected`)
 })
+
 
 })
 

@@ -38,7 +38,18 @@ setUserId(decoded.id)
 }
 
 
-}, []) 
+}, [])
+
+useEffect(() => {
+
+
+// @ts-ignore
+// if(socket.rooms.hasOwnProperty(conversationId)){
+//   socket.emit("leave_room", (conversationId))
+// }
+console.log(socket)
+}, [conversationId])
+
 
   return (
     <div className='flex'>
