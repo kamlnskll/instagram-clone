@@ -44,9 +44,9 @@ setUserId(decoded.id)
 
 }, [])
 
-useEffect(() => {
-console.log(socket)
-}, [conversationId])
+// useEffect(() => {
+// console.log(socket)
+// }, [conversationId])
 
 
   return (
