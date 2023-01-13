@@ -48,6 +48,7 @@ useEffect(() => {
     getMessages(conversationId).then(res => {
       setChat(res)
       setLoading(false)
+      console.log(chat)
     })
   }
 
@@ -81,7 +82,7 @@ return () => {
         <h1></h1>
       ) : chat.map((chat: any) => {
         return (
-          <Chatbox chat={chat} userId={userId}/>
+          <Chatbox chat={chat} userId={userId} socket={socket}/>
         )
       })}
       

@@ -1,17 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 type Props = {
 chat: any,
-userId: any
+userId: any,
+socket: any,
 }
 
-const Chatbox = ({chat, userId}: Props) => {
-const isOwnUser = true
+const Chatbox = ({chat, userId, socket}: Props) => {
+
+const [isOwnUser, setIsOwnUser] = useState(false)
+
+useEffect(() => {
+if(chat && chat.sender._id == userId){
+setIsOwnUser(true)
+}
+else {
+setIsOwnUser(false)
+}
+}, [chat, userId])
 
   return (
-    <div className='py-2 px-2'>
+    <div className='py-2 px-2' key={chat._id}>
     {isOwnUser ? ( 
-      <div className='bg-gray-200 rounded-full w-fit px-4 ml-auto' key={chat}>
+      <div className='bg-gray-200 rounded-full w-fit px-4 ml-auto'>
     <h1 className='text-center py-3 text-sm'>{chat.message}</h1>
   </div> ) : (
     <div className='ml-auto'>
