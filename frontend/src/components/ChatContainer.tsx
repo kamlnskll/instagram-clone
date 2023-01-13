@@ -27,11 +27,15 @@ message: message,
 time: new Date(Date.now()).getHours() + ':' + new Date(Date.now()).getMinutes(),
 }
 
-await socket.emit('send_message', messageData)
-// @ts-ignore
-setChat((oldChat) => [...oldChat, messageData])
-console.log(messageData)
-setMessage('')
+await socket.emit('send_message', messageData, () => {
+
+
+  // @ts-ignore
+  setChat((oldChat) => [...oldChat, messageData])
+  console.log(messageData)
+  setMessage('')
+
+})
 
 await createMessage(userId, conversationId, message)
 
@@ -48,11 +52,18 @@ useEffect(() => {
 
 }, [conversationId])
 
+// Receive message duplicates messages on the frontend I believe.
+// Commenting out this code removes the duplicatation so it must be something here
+
 useEffect(() => {
 socket.on("receive_message", async (data: any) => {
 // @ts-ignore
 setChat((oldChat) => [...oldChat, data])
 })
+
+return () => {
+  socket.off("receive_message");
+};
 
 }, [socket])
 
