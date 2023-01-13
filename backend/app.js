@@ -43,26 +43,37 @@ mongoose.connection.on('Disconnected', () => {
     console.log('Disconnected from MongoDB cluster')
 })
 
-// // Socket IO Stuff
+// Socket IO Stuff
 
 io.on('connection', (socket) => {
-console.log(`A user has connected to ${socket.id}`)
+console.log(`User with ID: ${socket.id} connected`)
 
-socket.on('send_message', (message) => {
-   socket.broadcast.emit("receive_message", (message))
+socket.on("join_room", (data) => {
+    if(!socket.rooms.hasOwnProperty(data)){
+        socket.join(data)
+        console.log(`User with ID: ${socket.id} joined room: ${data}`)
+    } else {
+        console.log(`User with ID: ${socket.id} is already in room: ${data}`)
+    }
+    
 })
 
-socket.on('receive_message', (data) => {
-    console.log(data)
+socket.on("leave_room", (data) => {
+socket.leave(data)
+console.log(`User with ID: ${socket.id} left room ${data}`)
+})
+
+
+socket.once('send_message', (data) => {
+   socket.to(data.room).emit("receive_message", data)
 })
 
 socket.on('disconnect', () => {
-    console.log('User disconnected')
+    console.log(`User with ID: ${socket.id} disconnected`)
 })
 
 
 })
-
 
 app.get('/', (req, res) => {
     res.send('Hello World!')

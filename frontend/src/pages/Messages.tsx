@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import ChatContainer from '../components/ChatContainer'
 import Navbar from '../components/Navbar'
-import {io } from 'socket.io-client'
+import { io } from 'socket.io-client'
 import { userContext } from '../context/auth'
 import { getConversations } from '../utils/axios/messageAPIs'
 import jwtDecode from 'jwt-decode'
@@ -14,9 +14,19 @@ const [conversations, setConversations] = useState([])
 const [conversationId, setConversationId] = useState('')
 const [loading, setLoading] = useState(true)
 const [userId, setUserId] = useState(null)
+const [currentRoom, setCurrentRoom] = useState('')
 
 
 // console.log('decodedId', decoded.id)  
+
+const joinRoom = (conversation: any) => {
+  
+  if(conversation !== '' && currentRoom !== conversation){
+    socket.emit("join_room", conversation)
+    setCurrentRoom(conversation)
+  } 
+  
+}
 
 useEffect(() => {
 
@@ -30,10 +40,14 @@ if(user){
 const decoded: any = jwtDecode(user)
 setUserId(decoded.id)
 }
-// console.log('userId from context', userId)
 
 
-}, []) 
+}, [])
+
+useEffect(() => {
+console.log(socket)
+}, [conversationId])
+
 
   return (
     <div className='flex'>
@@ -48,7 +62,11 @@ setUserId(decoded.id)
           </h1>
         ) : conversations.map((convo: any) => {
           return(
-            <div key={convo._id} className='flex hover:bg-gray-50 cursor-pointer px-4' onClick={() => setConversationId(convo._id)}>
+            // @ts-ignore
+            <div key={convo._id} className='flex hover:bg-gray-50 cursor-pointer px-4' onClick={() => {
+              joinRoom(convo._id)
+              setConversationId(convo._id)
+              }}>
               <img className='w-[40px] h-[40px] rounded-full my-2' src={convo.members[0].profilePic}/>
               <h1 className='pl-2 my-2'>{convo.members[0].userName}</h1>
             </div>
