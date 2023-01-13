@@ -60,8 +60,12 @@ setMessage('')
 
 useEffect(() => {
 socket.on("receive_message", async (data: any) => {
-// @ts-ignore
-setChat((oldChat) => [...oldChat, data])
+
+if(data.conversationId === conversationId){
+  // @ts-ignore
+  setChat((oldChat) => [...oldChat, data])
+}
+  // console.log(data)
 })
 
 return () => {
