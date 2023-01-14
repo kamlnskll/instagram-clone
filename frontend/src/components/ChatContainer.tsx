@@ -35,7 +35,7 @@ await socket.emit('send_message', messageData, () => {
 
 })
 
-await createMessage(userId, conversationId, message)
+await createMessage(userId, conversationId, message).then(res => console.log("Res from create message", res))
 
 setMessage('')
 
@@ -47,7 +47,7 @@ useEffect(() => {
     getMessages(conversationId).then(res => {
       setChat(res)
       setLoading(false)
-      console.log(chat)
+      // console.log(chat)
     })
   }
 

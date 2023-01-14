@@ -11,11 +11,11 @@ const Chatbox = ({chat, userId, chatLength, key}: Props) => {
 
 const [isOwnUser, setIsOwnUser] = useState(false)
 
-
+// Right now, the chat.sender ID is received first and compares to the UserID but the chat.sender._id is not received so everything else is not filled
+// So the chat is on the correct side but I need to wait for the sender field to be populated.
 
 useEffect(() => {
   if(chat && chat.sender._id === userId || chat.sender == userId){
-    // 
     setIsOwnUser(true)
     }
     else {
