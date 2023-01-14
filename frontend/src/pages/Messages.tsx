@@ -36,6 +36,8 @@ getConversations().then(res => {
   setLoading(false)
 })
 
+console.log(conversations)
+
 if(user){
 const decoded: any = jwtDecode(user)
 setUserId(decoded.id)
@@ -67,13 +69,13 @@ setUserId(decoded.id)
               joinRoom(convo._id)
               setConversationId(convo._id)
               }}>
-              <img className='w-[40px] h-[40px] rounded-full my-2' src={convo.members[0].profilePic}/>
-              <h1 className='pl-2 my-2'>{convo.members[0].userName}</h1>
+              <img className='w-[40px] h-[40px] rounded-full my-2' src={convo.members.filter((user: any) => user._id !== userId)[0].profilePic}/>
+              <h1 className='pl-2 my-2'>{convo.members.filter((user: any) => user._id !== userId)[0].userName}</h1>
             </div>
           )
         })}
       </div>
-      <div className='col-span-3'>
+      <div className='col-span-3 '>
 <ChatContainer socket={socket} conversationId={conversationId} userId={userId}/>      
       </div>
       </div>
