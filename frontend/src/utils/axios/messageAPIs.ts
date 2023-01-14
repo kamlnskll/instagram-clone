@@ -11,11 +11,29 @@ try{
     return conversations.data
 
 } catch(err){
-
-
+    console.log(err)
 }
 
 }
+
+export const newConversation = async (sender: any, receiver: any) => {
+
+    const conversationData = {
+    senderId: sender,
+    receiverId: receiver
+    }
+
+    try{
+        const newConversation = await axios.post(`${baseURL}${conversationURL}/newconversation`, conversationData)
+        return newConversation
+    
+    } catch(err){
+    console.log(err)
+
+    }
+    
+    }
+
 
 export const getMessages = async (conversationId: any) => {
 

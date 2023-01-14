@@ -6,6 +6,7 @@ import { userContext } from '../context/auth'
 import { getConversations } from '../utils/axios/messageAPIs'
 import jwtDecode from 'jwt-decode'
 import { checkIfValidToken } from '../utils/verifyToken'
+import NewConvoModal from '../components/NewConvoModal'
 
 const Messages = () => {
 const socket = io('http://localhost:8000')
@@ -15,6 +16,7 @@ const [conversationId, setConversationId] = useState('')
 const [loading, setLoading] = useState(true)
 const [userId, setUserId] = useState(null)
 const [currentRoom, setCurrentRoom] = useState('')
+const [openConvoModal, setOpenConvoModal] = useState(false)
 
 
 // console.log('decodedId', decoded.id)  
@@ -26,6 +28,10 @@ const joinRoom = (conversation: any) => {
     setCurrentRoom(conversation)
   } 
   
+}
+
+const closeModalFunction = (boolean: any) => {
+setOpenConvoModal(boolean)
 }
 
 useEffect(() => {
@@ -54,10 +60,17 @@ setUserId(decoded.id)
   return (
     <div className='flex'>
       <Navbar />
-      <div className='w-full'>
+      <div className='w-full relative'>
+      <NewConvoModal isOpen={openConvoModal} userId={userId} modalCloseFunction={closeModalFunction}/>
       <div className='bg-white border w-3/4 mx-auto h-5/6 my-16 rounded-md'>
       <div className='grid grid-cols-5 h-full'>
-      <div className='col-span-2 bg-white pt-5 border-r'>
+      <div className='col-span-2 bg-white border-r relative'>
+      <div className='pb-8'>
+      <h1 className='absolute top-1 right-3 hover:bg-gray-100 px-2 rounded-full text-xl cursor-pointer font-semibold' onClick={() => {
+        setOpenConvoModal(!openConvoModal)
+        console.log(openConvoModal)
+        }}>+</h1>
+      </div>
         {loading ? (
           <h1>
             Loading

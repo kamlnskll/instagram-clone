@@ -30,8 +30,6 @@ setLoading(false)
         </h1>
         <div className='px-6 pt-3 border-b relative'>
         <SearchInput onSearch={handleSearch} />
-        {/* <button onClick={() => console.log(search)}>Test for search results </button> */}
-        {/* <input placeholder='Search' className='w-full py-2 mb-6 pl-4 outline-none bg-gray-200 border-none rounded-lg' /> */}
         </div>
     </div>
     {loading ? (
