@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import SearchInput from './SearchInput'
+import { newConversation, createMessage } from '../utils/axios/messageAPIs'
 
 type Props = {
 
@@ -20,8 +21,16 @@ const handleSearch = (searchResults: any) => {
         setLoading(false)
         }
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
+if(user.hasOwnProperty('_id')){
+// @ts-ignore
+await newConversation(userId, user._id).then(res => {
+    console.log(res?.data)
+    createMessage(userId, res?.data._id, message).then(res => {
+        setMessage('')
+        console.log(res?.data)})})
 
+}
 
 }
 
@@ -59,7 +68,7 @@ const handleSubmit = () => {
             <h1 className='font-semibold text-center'>Type your first message</h1>
     <div className='flex relative'>
       <input placeholder='Message...' className='border rounded-full pl-6 h-[40px] mx-auto outline-none text-md w-5/6 my-auto' value={message} onChange={(e) => setMessage(e.target.value)}/>
-      <button type='button' className={message !== '' ? `hover:bg-blue-500 bg-blue-400 px-2 py-1 absolute right-14 top-2 text-xs rounded-xl text-white font-semibold` : `hidden`}>Send</button>
+      <button type='button' className={message !== '' ? `hover:bg-blue-500 bg-blue-400 px-2 py-1 absolute right-14 top-2 text-xs rounded-xl text-white font-semibold` : `hidden`} onClick={handleSubmit}>Send</button>
       </div>
         </div>
 
