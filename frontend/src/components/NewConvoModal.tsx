@@ -6,10 +6,11 @@ type Props = {
 
 isOpen: boolean,
 userId: any,
+modalCloseFunction: any
 
 }
 
-const NewConvoModal = ({isOpen, userId}: Props) => {
+const NewConvoModal = ({isOpen, userId, modalCloseFunction}: Props) => {
 
 const [search, setSearch] = useState([])
 const [loading, setLoading] = useState(true)
@@ -27,6 +28,7 @@ if(user.hasOwnProperty('_id')){
 await newConversation(userId, user._id).then(res => {
     console.log(res?.data)
     createMessage(userId, res?.data._id, message).then(res => {
+        modalCloseFunction(false)
         setMessage('')
         console.log(res?.data)})})
 

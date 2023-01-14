@@ -16,7 +16,7 @@ const [conversationId, setConversationId] = useState('')
 const [loading, setLoading] = useState(true)
 const [userId, setUserId] = useState(null)
 const [currentRoom, setCurrentRoom] = useState('')
-const [openConvoModal, setOpenConvoModal] = useState(true)
+const [openConvoModal, setOpenConvoModal] = useState(false)
 
 
 // console.log('decodedId', decoded.id)  
@@ -28,6 +28,10 @@ const joinRoom = (conversation: any) => {
     setCurrentRoom(conversation)
   } 
   
+}
+
+const closeModalFunction = (boolean: any) => {
+setOpenConvoModal(boolean)
 }
 
 useEffect(() => {
@@ -57,7 +61,7 @@ setUserId(decoded.id)
     <div className='flex'>
       <Navbar />
       <div className='w-full relative'>
-      <NewConvoModal isOpen={openConvoModal} userId={userId}/>
+      <NewConvoModal isOpen={openConvoModal} userId={userId} modalCloseFunction={closeModalFunction}/>
       <div className='bg-white border w-3/4 mx-auto h-5/6 my-16 rounded-md'>
       <div className='grid grid-cols-5 h-full'>
       <div className='col-span-2 bg-white border-r relative'>
