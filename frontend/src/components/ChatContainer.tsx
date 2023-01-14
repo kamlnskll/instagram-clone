@@ -32,11 +32,10 @@ await socket.emit('send_message', messageData, () => {
 
   // @ts-ignore
   setChat((oldChat) => [...oldChat, messageData])
-  console.log(messageData)
 
 })
 
-await createMessage(userId, conversationId, message)
+await createMessage(userId, conversationId, message).then(res => console.log("Res from create message", res))
 
 setMessage('')
 
@@ -48,6 +47,7 @@ useEffect(() => {
     getMessages(conversationId).then(res => {
       setChat(res)
       setLoading(false)
+      // console.log(chat)
     })
   }
 
@@ -55,8 +55,9 @@ setMessage('')
 
 }, [conversationId])
 
-// Receive message duplicates messages on the frontend I believe.
-// Commenting out this code removes the duplicatation so it must be something here
+
+
+
 
 useEffect(() => {
 socket.on("receive_message", async (data: any) => {
@@ -65,7 +66,6 @@ if(data.conversationId === conversationId){
   // @ts-ignore
   setChat((oldChat) => [...oldChat, data])
 }
-  // console.log(data)
 })
 
 return () => {
@@ -79,9 +79,9 @@ return () => {
     <div className='row-span-6 overflow-y-scroll'>
       {loading ? (
         <h1></h1>
-      ) : chat.map((chat: any) => {
+      ) : chat.map((chats: any) => {
         return (
-          <Chatbox chat={chat} userId={userId}/>
+          <Chatbox key={chats._id} chat={chats} userId={userId} chatLength={chat.length}/>
         )
       })}
       

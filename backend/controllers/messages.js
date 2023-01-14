@@ -6,8 +6,10 @@ export const sendMessage = async (req, res) => {
 const message = new Message(req.body)
 try{
 const savedMessage = await message.save()
+await savedMessage.populate('sender')
 io.emit('receive_message', savedMessage)
 res.send(savedMessage)
+console.log(savedMessage)
 
 } catch(err) {
 console.log(err)

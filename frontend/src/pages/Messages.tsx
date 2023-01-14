@@ -44,9 +44,9 @@ setUserId(decoded.id)
 
 }, [])
 
-useEffect(() => {
-console.log(socket)
-}, [conversationId])
+// useEffect(() => {
+// console.log(socket)
+// }, [conversationId])
 
 
   return (
@@ -77,7 +77,6 @@ console.log(socket)
 <ChatContainer socket={socket} conversationId={conversationId} userId={userId}/>      
       </div>
       </div>
-        {/* <h1 className=''>CHAT CONTAINER</h1> */}
     </div>
       </div>
       
