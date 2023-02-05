@@ -32,7 +32,6 @@ const [isOpen, setIsOpen] = useState(false)
 const [openSearch, setOpenSearch] = useState(false)
 const [openMoreMenu, setOpenMoreMenu] = useState(false)
 
-const { logout } = logoutUser()
 
 
   return (
@@ -73,6 +72,9 @@ const { logout } = logoutUser()
     <MoreModal isOpen={openMoreMenu} />
     <MenuIcon />
     <h1 className='invisible md:visible'>More</h1>
+    </ul>
+    <ul>
+      
     </ul>
     {/* <div className='py-24'>
 <button type='button' onClick={() => {logout()}}>Logout User</button>
