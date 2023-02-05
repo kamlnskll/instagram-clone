@@ -11,6 +11,8 @@ import { Link, useParams } from 'react-router-dom'
 import { getProfileUsernameandProfilePic } from '../utils/axios/profileAPIs'
 import NewPostModal from './NewPostModal'
 import Search from './Search'
+import { MenuIcon } from './icons/Menu'
+import MoreModal from './MoreModal'
 
 
 
@@ -28,8 +30,8 @@ useEffect(() => {
 
 const [isOpen, setIsOpen] = useState(false)
 const [openSearch, setOpenSearch] = useState(false)
+const [openMoreMenu, setOpenMoreMenu] = useState(false)
 
-const { logout } = logoutUser()
 
 
   return (
@@ -66,11 +68,17 @@ const { logout } = logoutUser()
     <img className='w-[32px] h-[32px] rounded-full' src={profile.profilePic}/>
     <h1 className='invisible md:visible'>{profile.userName}</h1>
     </Link>
-    <div className='py-24'>
-    {/* <button onClick={() => getSubscribedPosts().then((res) => {
-  console.log("michael should be following all 3 peeps", res)})}>TEST BUTTON FOR SUBSCRIBED POSTS</button> */}
+    <ul className='pl-2 flex gap-4 py-2 mb-auto cursor-pointer hover:bg-gray-50 hover:rounded-full relative' onClick={() => setOpenMoreMenu(!openMoreMenu)}>
+    <MoreModal isOpen={openMoreMenu} />
+    <MenuIcon />
+    <h1 className='invisible md:visible'>More</h1>
+    </ul>
+    <ul>
+      
+    </ul>
+    {/* <div className='py-24'>
 <button type='button' onClick={() => {logout()}}>Logout User</button>
-</div>
+</div> */}
     </div>
   </nav>
   <div className='relative'>
